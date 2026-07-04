@@ -12,14 +12,14 @@ Resolved versions at scaffold time: `next@16.2.10` · `react@19.2.4` · `tailwin
 
 | Module | Owner | File |
 |---|---|---|
-| navbar | Umesh | `modules/navbar/Navbar.tsx` |
-| hero | Umesh | `modules/hero/Hero.tsx` |
-| services | Govinda | `modules/services/Services.tsx` |
-| work | Govinda | `modules/work/Work.tsx` |
-| process | Anish | `modules/process/Process.tsx` |
-| contact | Anish | `modules/contact/Contact.tsx` |
-| team | Ayush | `modules/team/Team.tsx` |
-| footer | Ayush | `modules/footer/Footer.tsx` |
+| navbar | Er. Umesh Ranjbanshi | `modules/navbar/Navbar.tsx` |
+| hero | Er. Umesh Ranjbanshi | `modules/hero/Hero.tsx` |
+| services | Er. Govinda Bhandari | `modules/services/Services.tsx` |
+| work | Er. Govinda Bhandari | `modules/work/Work.tsx` |
+| process | Er. Anish Ghimire | `modules/process/Process.tsx` |
+| contact | Er. Anish Ghimire | `modules/contact/Contact.tsx` |
+| team | Er. Ayush Khanal | `modules/team/Team.tsx` |
+| footer | Er. Ayush Khanal | `modules/footer/Footer.tsx` |
 
 Shared files (`app/page.tsx`, `data/`, `lib/`) require review from all 4 founders.
 
