@@ -5,6 +5,8 @@
  * Module rules: import only from data/, lib/, components/ui/ — never
  * from another module. All CSS custom properties live in globals.css.
  */
+import type { CSSProperties } from "react";
+
 import { Button } from "@/components/ui/button";
 import type { Project } from "@/lib/types";
 
@@ -24,9 +26,12 @@ const MARKER_POSITIONS = [
 
 export function Hero({ markerProjects, onMarkerClick }: HeroProps) {
   return (
-    <header className="relative flex min-h-svh items-center overflow-hidden bg-paper text-ink">
-      {/* Topographic contour field — decorative; drift animation is the only
-          animation on the page and pauses under prefers-reduced-motion */}
+    <section
+      id="top"
+      className="relative flex min-h-svh items-center overflow-hidden bg-paper text-ink"
+    >
+      {/* Topographic contour field — decorative; the drift, like all motion
+          on the page, pauses under prefers-reduced-motion */}
       <svg
         className="absolute inset-0 h-full w-full"
         viewBox="0 0 1440 900"
@@ -86,18 +91,27 @@ export function Hero({ markerProjects, onMarkerClick }: HeroProps) {
       ))}
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-24">
-        <h1 className="max-w-4xl font-display text-4xl font-bold leading-tight text-ink md:text-6xl lg:text-7xl">
+        <h1
+          className="intro-fade max-w-4xl font-display text-4xl font-bold leading-tight text-ink md:text-6xl lg:text-7xl"
+          style={{ "--intro-step": 0 } as CSSProperties}
+        >
           AI systems, software &amp; mobile apps — engineered in Kathmandu.
         </h1>
-        <p className="mt-6 max-w-xl font-body text-lg text-contour md:text-xl">
+        <p
+          className="intro-fade mt-6 max-w-xl font-body text-lg text-contour md:text-xl"
+          style={{ "--intro-step": 1 } as CSSProperties}
+        >
           We design it. We build it. We ship it. One senior team.
         </p>
-        <div className="mt-10">
+        <div
+          className="intro-fade mt-10"
+          style={{ "--intro-step": 2 } as CSSProperties}
+        >
           <Button asChild size="lg" className="px-6 text-base">
             <a href="#contact">Start a project</a>
           </Button>
         </div>
       </div>
-    </header>
+    </section>
   );
 }

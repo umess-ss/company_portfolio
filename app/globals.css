@@ -164,7 +164,16 @@
   }
 }
 
-/* Hero contour field — the ONLY animation on the page */
+/* Sticky navbar offset for #section anchor jumps */
+section[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+/* ── Motion ──────────────────────────────────────────────────────────
+   All animation lives here: the hero contour drift, the hero intro
+   stagger, and the scroll-reveal used by sections. Everything pauses
+   under prefers-reduced-motion. */
+
 @keyframes contour-drift {
   from {
     transform: translate(0px, 0px);
@@ -178,11 +187,83 @@
   animation: contour-drift 20s ease-in-out infinite alternate;
 }
 
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Hero intro — staggered via --intro-step set inline */
+  .intro-fade {
+    animation: fade-up 0.7s ease-out both;
+    animation-delay: calc(var(--intro-step, 0) * 120ms);
+  }
+
+  /* Scroll reveal — hidden state only applies once JS has stamped
+     .js on <html>, so content is never lost without JavaScript */
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
+  }
+  .js .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .contour-drift {
     animation: none;
   }
   html {
     scroll-behavior: auto;
+  }
+}
+
+/* Reveal animations — only hide when JS is active */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero intro stagger */
+.intro-stagger {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  transition-delay: calc(var(--intro-step, 0) * 120ms);
+}
+
+.js .intro-stagger {
+  opacity: 0;
+}
+
+.js .intro-stagger.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .intro-stagger {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }

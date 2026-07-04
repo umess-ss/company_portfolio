@@ -22,6 +22,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Reveal } from "@/components/ui/reveal";
 import {
   Select,
   SelectContent,
@@ -79,13 +80,16 @@ export function Contact() {
   return (
     <section id="contact" className="bg-paper py-24">
       <div className="mx-auto max-w-2xl px-6">
-        <p className="font-mono text-xs uppercase tracking-widest text-contour">
-          Start a project
-        </p>
-        <h2 className="mt-4 font-display text-3xl font-medium text-ink">
-          Tell us what you&apos;re building.
-        </h2>
-        <Form {...form}>
+        <Reveal>
+          <p className="font-mono text-xs uppercase tracking-widest text-contour">
+            Start a project
+          </p>
+          <h2 className="mt-4 font-display text-3xl font-medium text-ink">
+            Tell us what you&apos;re building.
+          </h2>
+        </Reveal>
+        <Reveal delay={90}>
+          <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className="mt-10 flex flex-col gap-6"
@@ -187,7 +191,8 @@ export function Contact() {
               {form.formState.isSubmitting ? "Sending…" : "Send message"}
             </Button>
           </form>
-        </Form>
+          </Form>
+        </Reveal>
       </div>
     </section>
   );

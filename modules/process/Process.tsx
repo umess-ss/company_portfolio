@@ -3,6 +3,7 @@
  * Module rules: import only from data/, lib/, components/ui/ — never
  * from another module. All CSS custom properties live in globals.css.
  */
+import { Reveal } from "@/components/ui/reveal";
 import type { ProcessStep } from "@/lib/types";
 
 const STEPS: ProcessStep[] = [
@@ -42,10 +43,12 @@ export function Process() {
   return (
     <section id="process" className="bg-paper py-24">
       <div className="mx-auto max-w-6xl px-6">
-        <p className="font-mono text-xs uppercase tracking-widest text-contour">
-          How we work
-        </p>
-        <div className="mt-8 flex flex-col md:flex-row">
+        <Reveal>
+          <p className="font-mono text-xs uppercase tracking-widest text-contour">
+            How we work
+          </p>
+        </Reveal>
+        <Reveal delay={90} className="mt-8 flex flex-col md:flex-row">
           {STEPS.map((step, i) => (
             <div key={step.number} className="flex flex-1 flex-col md:flex-row">
               {/* hairline divider between steps */}
@@ -66,7 +69,7 @@ export function Process() {
               </div>
             </div>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

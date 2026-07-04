@@ -71,6 +71,10 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        {/* Stamp .js so scroll-reveal styles only hide content when JS runs */}
+        <Script id="js-flag" strategy="beforeInteractive">
+          {`document.documentElement.classList.add("js")`}
+        </Script>
         <Script
           id="organization-jsonld"
           type="application/ld+json"

@@ -17,6 +17,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Reveal } from "@/components/ui/reveal";
 import type { Project } from "@/lib/types";
 
 export interface WorkProps {
@@ -39,48 +40,51 @@ export function Work({ projects, openSlug, onOpenChange }: WorkProps) {
   return (
     <section id="work" className="bg-ink py-24 text-paper">
       <div className="mx-auto max-w-6xl px-6">
-        <p className="font-mono text-xs uppercase tracking-widest text-contour">
-          Selected work
-        </p>
+        <Reveal>
+          <p className="font-mono text-xs uppercase tracking-widest text-contour">
+            Selected work
+          </p>
+        </Reveal>
         <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-          {projects.map((project) => (
-            <button
-              key={project.id}
-              type="button"
-              onClick={() => onOpenChange(project.slug)}
-              className="group cursor-pointer rounded-xl border border-paper/10 bg-paper/5 p-5 text-left transition-transform hover:-translate-y-1"
-              aria-label={`View case study: ${project.title}`}
-            >
-              <div className="relative aspect-8/5 w-full overflow-hidden rounded-lg">
-                <Image
-                  src={`/placeholder/${project.slug}.svg`}
-                  alt={`${project.title} cover`}
-                  fill
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="mt-5 flex items-center gap-3">
-                <span className="font-body text-sm text-contour">
-                  {project.clientName ?? "Confidential"}
+          {projects.map((project, i) => (
+            <Reveal key={project.id} delay={(i % 2) * 90} className="h-full">
+              <button
+                type="button"
+                onClick={() => onOpenChange(project.slug)}
+                className="group h-full w-full cursor-pointer rounded-xl border border-paper/10 bg-paper/5 p-5 text-left transition-transform hover:-translate-y-1"
+                aria-label={`View case study: ${project.title}`}
+              >
+                <div className="relative aspect-8/5 w-full overflow-hidden rounded-lg">
+                  <Image
+                    src={`/placeholder/${project.slug}.svg`}
+                    alt={`${project.title} cover`}
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="mt-5 flex items-center gap-3">
+                  <span className="font-body text-sm text-contour">
+                    {project.clientName ?? "Confidential"}
+                  </span>
+                  <Badge
+                    variant="outline"
+                    className="border-paper/20 bg-paper/10 font-mono text-xs text-paper"
+                  >
+                    {project.serviceName}
+                  </Badge>
+                </div>
+                <h3 className="mt-2 font-display text-xl font-medium text-paper">
+                  {project.title}
+                </h3>
+                <p className="mt-2 font-body text-sm text-contour">
+                  {project.summary}
+                </p>
+                <span className="mt-4 inline-block font-body text-sm text-signal">
+                  View case study →
                 </span>
-                <Badge
-                  variant="outline"
-                  className="border-paper/20 bg-paper/10 font-mono text-xs text-paper"
-                >
-                  {project.serviceName}
-                </Badge>
-              </div>
-              <h3 className="mt-2 font-display text-xl font-medium text-paper">
-                {project.title}
-              </h3>
-              <p className="mt-2 font-body text-sm text-contour">
-                {project.summary}
-              </p>
-              <span className="mt-4 inline-block font-body text-sm text-signal">
-                View case study →
-              </span>
-            </button>
+              </button>
+            </Reveal>
           ))}
         </div>
       </div>
