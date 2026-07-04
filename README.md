@@ -12,6 +12,7 @@ Resolved versions at scaffold time: `next@16.2.10` · `react@19.2.4` · `tailwin
 
 | Module | Owner | File |
 |---|---|---|
+| navbar | Umesh | `modules/navbar/Navbar.tsx` |
 | hero | Umesh | `modules/hero/Hero.tsx` |
 | services | Govinda | `modules/services/Services.tsx` |
 | work | Govinda | `modules/work/Work.tsx` |

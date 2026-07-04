@@ -18,7 +18,7 @@
 
 | Founder | Modules |
 |---|---|
-| Umesh (@umess-ss) | `modules/hero/` |
+| Umesh (@umess-ss) | `modules/navbar/`, `modules/hero/` |
 | Govinda (@govinda) | `modules/services/`, `modules/work/` |
 | Anish (@anish) | `modules/process/`, `modules/contact/` |
 | Ayush (@ayush) | `modules/team/`, `modules/footer/` |

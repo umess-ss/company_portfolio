@@ -5,6 +5,7 @@
  */
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { Reveal } from "@/components/ui/reveal";
 import type { TeamMember } from "@/lib/types";
 
 /* lucide-react v1 removed brand icons, so GitHub/LinkedIn are inlined
@@ -54,12 +55,18 @@ export function Team({ members }: TeamProps) {
   return (
     <section id="team" className="bg-pine py-24 text-paper">
       <div className="mx-auto max-w-6xl px-6">
-        <p className="font-mono text-xs uppercase tracking-widest text-paper/60">
-          The team
-        </p>
+        <Reveal>
+          <p className="font-mono text-xs uppercase tracking-widest text-paper/60">
+            The team
+          </p>
+        </Reveal>
         <div className="mt-8 grid grid-cols-2 gap-8 md:grid-cols-4">
-          {members.map((member) => (
-            <div key={member.id} className="flex flex-col items-start gap-4">
+          {members.map((member, i) => (
+            <Reveal
+              key={member.id}
+              delay={i * 90}
+              className="flex flex-col items-start gap-4"
+            >
               <Avatar className="size-16">
                 {member.photo && (
                   <AvatarImage src={member.photo} alt={`Photo of ${member.name}`} />
@@ -105,7 +112,7 @@ export function Team({ members }: TeamProps) {
                   <LinkedinIcon className="size-5" />
                 </a>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

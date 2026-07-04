@@ -19,6 +19,7 @@ import { team } from "@/data/team";
 import { Contact } from "@/modules/contact";
 import { Footer } from "@/modules/footer";
 import { Hero } from "@/modules/hero";
+import { Navbar } from "@/modules/navbar";
 import { Process } from "@/modules/process";
 import { Services } from "@/modules/services";
 import { Team } from "@/modules/team";
@@ -29,11 +30,12 @@ export default function Home() {
 
   return (
     <>
-      <Hero
-        markerProjects={projects.slice(0, 3)}
-        onMarkerClick={setOpenProjectSlug}
-      />
+      <Navbar site={site} />
       <main>
+        <Hero
+          markerProjects={projects.slice(0, 3)}
+          onMarkerClick={setOpenProjectSlug}
+        />
         <Services services={services} />
         <Work
           projects={projects}
