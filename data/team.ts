@@ -8,7 +8,7 @@ import type { TeamMember } from "@/lib/types";
 export const team: TeamMember[] = [
   {
     id: "govinda",
-    name: "Govinda",
+    name: "Er. Govinda Bhandari",
     role: "Co-founder · AI & Backend",
     initials: "GV",
     skills: ["FastAPI", "LangChain", "PostgreSQL", "DevOps"],
@@ -18,7 +18,7 @@ export const team: TeamMember[] = [
   },
   {
     id: "anish",
-    name: "Anish",
+    name: "Er. Anish Ghimire",
     role: "Co-founder · Full-stack",
     initials: "AN",
     skills: ["Next.js", "TypeScript", "React", "Node.js"],
@@ -28,7 +28,7 @@ export const team: TeamMember[] = [
   },
   {
     id: "umesh",
-    name: "Umesh",
+    name: "Er. Umesh Ranjbanshi",
     role: "Co-founder · Frontend & Design",
     initials: "UM",
     skills: ["React", "Tailwind", "Figma", "Motion"],
@@ -38,7 +38,7 @@ export const team: TeamMember[] = [
   },
   {
     id: "ayush",
-    name: "Ayush",
+    name: "Er. Ayush Khanal",
     role: "Co-founder · Mobile & Systems",
     initials: "AY",
     skills: ["React Native", "Flutter", "Firebase", "Docker"],

@@ -18,10 +18,10 @@
 
 | Founder | Modules |
 |---|---|
-| Umesh (@umess-ss) | `modules/navbar/`, `modules/hero/` |
-| Govinda (@govinda) | `modules/services/`, `modules/work/` |
-| Anish (@anish) | `modules/process/`, `modules/contact/` |
-| Ayush (@ayush) | `modules/team/`, `modules/footer/` |
+| Er. Umesh Ranjbanshi (@umess-ss) | `modules/navbar/`, `modules/hero/` |
+| Er. Govinda Bhandari (@govinda) | `modules/services/`, `modules/work/` |
+| Er. Anish Ghimire (@anish) | `modules/process/`, `modules/contact/` |
+| Er. Ayush Khanal (@ayush) | `modules/team/`, `modules/footer/` |
 
 Shared files — `app/page.tsx`, `data/`, `lib/` — need review from **all 4 founders**.
 
