@@ -62,7 +62,7 @@ export function Navbar({ site }: NavbarProps) {
 
         <div className="flex items-center gap-3">
           <Button asChild size="sm" className="hidden md:inline-flex">
-            <a href="#contact">Start a project</a>
+            <a href="#contact">Contact us</a>
           </Button>
           <button
             type="button"
@@ -102,7 +102,7 @@ export function Navbar({ site }: NavbarProps) {
             <li className="pt-2">
               <Button asChild size="sm" className="w-full">
                 <a href="#contact" onClick={() => setMenuOpen(false)}>
-                  Start a project
+                  Contact us
                 </a>
               </Button>
             </li>

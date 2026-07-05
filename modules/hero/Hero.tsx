@@ -117,7 +117,7 @@ export function Hero({ markerProjects, onMarkerClick }: HeroProps) {
           style={{ "--intro-step": 2 } as CSSProperties}
         >
           <Button asChild size="lg" className="px-6 text-base">
-            <a href="#contact">Start a project</a>
+            <a href="#contact">Contact us</a>
           </Button>
           <Button
             asChild
