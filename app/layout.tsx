@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import Script from "next/script";
 import { Toaster } from "@/components/ui/sonner";
 import { site } from "@/data/site";
+import { Chatbot } from "@/modules/chatbot";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -83,6 +84,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         {children}
+        <Chatbot site={site} />
         <Toaster />
       </body>
     </html>
