@@ -25,6 +25,7 @@ import { Navbar } from "@/modules/navbar";
 import { Process } from "@/modules/process";
 import { Proof } from "@/modules/proof";
 import { Services } from "@/modules/services";
+import { Technologies } from "@/modules/technologies";
 import { Team } from "@/modules/team";
 import { Testimonials } from "@/modules/testimonials";
 import { Work } from "@/modules/work";
@@ -42,6 +43,7 @@ export default function Home() {
         />
         <Proof stats={stats} />
         <Services services={services} />
+        <Technologies />
         <Work
           projects={projects}
           openSlug={openProjectSlug}
