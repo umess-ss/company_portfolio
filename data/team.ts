@@ -10,7 +10,7 @@ export const team: TeamMember[] = [
   {
     id: "govinda",
     name: "Govinda Bhandari",
-    role: "Co-founder · AI & Backend",
+    role: "Full-stack",
     initials: "GB",
     skills: ["FastAPI", "LangChain", "PostgreSQL", "DevOps"],
     github: "https://github.com/govinda",
@@ -20,7 +20,7 @@ export const team: TeamMember[] = [
   {
     id: "anish",
     name: "Anish Ghimire",
-    role: "Co-founder · Full-stack",
+    role: "AI & Backend",
     initials: "AG",
     skills: ["Next.js", "TypeScript", "React", "Node.js"],
     github: "https://github.com/anish",
@@ -30,7 +30,7 @@ export const team: TeamMember[] = [
   {
     id: "umesh",
     name: "Umesh Rajbanshi",
-    role: "Co-founder · Frontend & Design",
+    role: "Frontend & DevOps",
     initials: "UR",
     skills: ["React", "Tailwind", "Figma", "Motion"],
     github: "https://github.com/umess-ss",
@@ -40,7 +40,7 @@ export const team: TeamMember[] = [
   {
     id: "ayush",
     name: "Ayush Khanal",
-    role: "Co-founder · Mobile & Systems",
+    role: "Mobile & Systems",
     initials: "AK",
     skills: ["React Native", "Flutter", "Firebase", "Docker"],
     github: "https://github.com/ayush",

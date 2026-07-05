@@ -58,7 +58,7 @@ export function Team({ members }: TeamProps) {
     <section id="team" className="scroll-mt-24 bg-paper py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeader
-          eyebrow="The team"
+          eyebrow="Founding teams"
           title="Four engineers, no handoffs."
           intro="The people you talk to are the people who build your system — from the first scoping call to the last deploy."
         />

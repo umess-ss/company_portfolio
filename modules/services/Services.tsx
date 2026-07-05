@@ -26,7 +26,7 @@ export function Services({ services }: ServicesProps) {
         <SectionHeader
           eyebrow="What we build"
           title="Three disciplines, one team."
-          intro="Every project is scoped, designed, built, and shipped by the same four engineers — no handoffs, no subcontractors."
+          intro="Every project is scoped, designed, built, and shipped by fully skilled Engineers — no handoffs, no subcontractors."
         />
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {services.map((service, i) => {
