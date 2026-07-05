@@ -12,9 +12,13 @@
 :root {
   --ink:     #111B26;   /* primary text / dark sections */
   --paper:   #F7F9F8;   /* page background              */
-  --contour: #8FA6B3;   /* hairlines, muted text        */
+  --contour: #8FA6B3;   /* hairlines; muted text on DARK backgrounds only */
   --signal:  #E4572E;   /* ONLY for CTAs, links, markers */
   --pine:    #1F4E46;   /* tags, footer background      */
+
+  /* Muted text on light backgrounds. --contour is 2.4:1 on paper (fails
+     WCAG AA); this darker step measures 4.6:1. Hairlines keep --contour. */
+  --contour-strong: #5F7482;
 }
 
 @theme {
@@ -23,6 +27,7 @@
   --color-contour: var(--contour);
   --color-signal:  var(--signal);
   --color-pine:    var(--pine);
+  --color-contour-strong: var(--contour-strong);
 }
 
 /* Fonts come from next/font/google variables set on <html> in app/layout.tsx */
@@ -205,6 +210,14 @@ section[id] {
     animation-delay: calc(var(--intro-step, 0) * 120ms);
   }
 
+  /* Hero project-marker dot — the only hover transform on the page */
+  .marker-dot {
+    transition: transform 0.2s ease-out;
+  }
+  .group:hover .marker-dot {
+    transform: scale(1.25);
+  }
+
   /* Scroll reveal — hidden state only applies once JS has stamped
      .js on <html>, so content is never lost without JavaScript */
   .js .reveal {
@@ -229,39 +242,9 @@ section[id] {
   }
 }
 
-/* Reveal animations — only hide when JS is active */
-.js .reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.js .reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Hero intro stagger */
-.intro-stagger {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-  transition-delay: calc(var(--intro-step, 0) * 120ms);
-}
-
-.js .intro-stagger {
-  opacity: 0;
-}
-
-.js .intro-stagger.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Respect reduced motion */
+/* Respect reduced motion — reveals render visible with no movement */
 @media (prefers-reduced-motion: reduce) {
-  .reveal,
-  .intro-stagger {
+  .reveal {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;

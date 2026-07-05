@@ -24,12 +24,14 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400"],
 });
 
+const pageTitle = `${site.name} — AI Systems, Software & Mobile Apps, Kathmandu`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: `${site.name} — ${site.tagline}`,
+  title: pageTitle,
   description: site.description,
   openGraph: {
-    title: `${site.name} — ${site.tagline}`,
+    title: pageTitle,
     description: site.description,
     type: "website",
     locale: "en_US",
@@ -37,7 +39,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — ${site.tagline}`,
+    title: pageTitle,
     description: site.description,
   },
 };
@@ -53,6 +55,7 @@ const organizationJsonLd = {
   description: site.description,
   url: site.url,
   email: site.email,
+  foundingDate: String(site.foundedYear),
   address: {
     "@type": "PostalAddress",
     addressLocality: "Kathmandu",

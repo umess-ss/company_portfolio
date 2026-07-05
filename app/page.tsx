@@ -15,14 +15,18 @@ import { useState } from "react";
 import { projects } from "@/data/projects";
 import { services } from "@/data/services";
 import { site } from "@/data/site";
+import { stats } from "@/data/stats";
 import { team } from "@/data/team";
+import { testimonials } from "@/data/testimonials";
 import { Contact } from "@/modules/contact";
 import { Footer } from "@/modules/footer";
 import { Hero } from "@/modules/hero";
 import { Navbar } from "@/modules/navbar";
 import { Process } from "@/modules/process";
+import { Proof } from "@/modules/proof";
 import { Services } from "@/modules/services";
 import { Team } from "@/modules/team";
+import { Testimonials } from "@/modules/testimonials";
 import { Work } from "@/modules/work";
 
 export default function Home() {
@@ -36,6 +40,7 @@ export default function Home() {
           markerProjects={projects.slice(0, 3)}
           onMarkerClick={setOpenProjectSlug}
         />
+        <Proof stats={stats} />
         <Services services={services} />
         <Work
           projects={projects}
@@ -43,8 +48,9 @@ export default function Home() {
           onOpenChange={setOpenProjectSlug}
         />
         <Process />
+        <Testimonials testimonials={testimonials} />
         <Team members={team} />
-        <Contact />
+        <Contact site={site} />
       </main>
       <Footer site={site} />
     </>

@@ -17,12 +17,14 @@ export interface HeroProps {
   onMarkerClick: (slug: string) => void;
 }
 
-/** Marker positions on the contour field, as percentages of the viewport. */
+/** Marker positions on the contour field, as percentages of the viewport.
+    Labels flip to the left of the dot near the right edge so they never
+    clip the viewport. */
 const MARKER_POSITIONS = [
-  { x: "18%", y: "30%" },
-  { x: "72%", y: "22%" },
-  { x: "60%", y: "68%" },
-];
+  { x: "18%", y: "30%", labelSide: "right" },
+  { x: "72%", y: "22%", labelSide: "left" },
+  { x: "60%", y: "68%", labelSide: "right" },
+] as const;
 
 export function Hero({ markerProjects, onMarkerClick }: HeroProps) {
   return (
@@ -71,44 +73,59 @@ export function Hero({ markerProjects, onMarkerClick }: HeroProps) {
       </svg>
 
       {/* Project markers pinned onto the contour field */}
-      {markerProjects.slice(0, 3).map((project, i) => (
-        <button
-          key={project.slug}
-          type="button"
-          onClick={() => onMarkerClick(project.slug)}
-          className="group absolute z-10 hidden -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center gap-2 md:flex"
-          style={{ left: MARKER_POSITIONS[i].x, top: MARKER_POSITIONS[i].y }}
-          aria-label={`Open case study: ${project.title}`}
-        >
-          <span
-            className="size-3 rounded-full bg-signal ring-4 ring-signal/20 transition-transform group-hover:scale-125"
-            aria-hidden="true"
-          />
-          <span className="font-mono text-xs text-contour transition-colors group-hover:text-ink">
-            {project.title}
-          </span>
-        </button>
-      ))}
+      {markerProjects.slice(0, 3).map((project, i) => {
+        const position = MARKER_POSITIONS[i];
+        return (
+          <button
+            key={project.slug}
+            type="button"
+            onClick={() => onMarkerClick(project.slug)}
+            className={`group absolute z-10 hidden -translate-y-1/2 cursor-pointer items-center gap-2 md:flex ${
+              position.labelSide === "left"
+                ? "-translate-x-full flex-row-reverse"
+                : ""
+            }`}
+            style={{ left: position.x, top: position.y }}
+            aria-label={`Open case study: ${project.title}`}
+          >
+            <span
+              className="marker-dot size-3 shrink-0 rounded-full bg-signal ring-4 ring-signal/20"
+              aria-hidden="true"
+            />
+            <span className="whitespace-nowrap font-mono text-xs text-contour-strong transition-colors group-hover:text-ink">
+              {project.title}
+            </span>
+          </button>
+        );
+      })}
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-24">
         <h1
-          className="intro-fade max-w-4xl font-display text-4xl font-bold leading-tight text-ink md:text-6xl lg:text-7xl"
+          className="intro-fade max-w-4xl font-display text-4xl font-bold leading-[1.05] tracking-tight text-ink md:text-6xl lg:text-7xl"
           style={{ "--intro-step": 0 } as CSSProperties}
         >
           AI systems, software &amp; mobile apps — engineered in Kathmandu.
         </h1>
         <p
-          className="intro-fade mt-6 max-w-xl font-body text-lg text-contour md:text-xl"
+          className="intro-fade mt-6 max-w-xl font-body text-lg text-contour-strong md:text-xl"
           style={{ "--intro-step": 1 } as CSSProperties}
         >
           We design it. We build it. We ship it. One senior team.
         </p>
         <div
-          className="intro-fade mt-10"
+          className="intro-fade mt-10 flex flex-wrap items-center gap-4"
           style={{ "--intro-step": 2 } as CSSProperties}
         >
           <Button asChild size="lg" className="px-6 text-base">
             <a href="#contact">Start a project</a>
+          </Button>
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="border-contour/40 px-6 text-base text-ink hover:border-contour"
+          >
+            <a href="#work">See our work →</a>
           </Button>
         </div>
       </div>

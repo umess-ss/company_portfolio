@@ -12,6 +12,8 @@ export interface SiteConfig {
   url: string;
   email: string;
   location: string;
+  responseTime: string;
+  foundedYear: number;
   social: {
     github: string;
     linkedin: string;
@@ -24,6 +26,7 @@ export interface Service {
   description: string;
   icon: LucideIcon;
   tags: string[];
+  deliverables: string[];
 }
 
 export interface ProjectMetric {
@@ -31,12 +34,18 @@ export interface ProjectMetric {
   value: string;
 }
 
+/** Which code-drawn mockup ProductFrame renders as a project's cover art. */
+export type ProductScreen = "fleet" | "hospital" | "docs" | "banking";
+
 export interface Project {
   id: string;
   slug: string;
   title: string;
   clientName: string | null;
   serviceName: string;
+  year: number;
+  durationWeeks: number;
+  teamSize: number;
   summary: string;
   problem: string;
   approach: string;
@@ -44,7 +53,7 @@ export interface Project {
   outcomes: string;
   metrics: ProjectMetric[];
   techStack: string[];
-  coverPlaceholderColor: string;
+  screen: ProductScreen;
 }
 
 export interface TeamMember {
@@ -62,4 +71,16 @@ export interface ProcessStep {
   number: string;
   title: string;
   description: string;
+}
+
+export interface Stat {
+  value: string;
+  label: string;
+}
+
+export interface Testimonial {
+  quote: string;
+  name: string;
+  title: string;
+  organization: string;
 }

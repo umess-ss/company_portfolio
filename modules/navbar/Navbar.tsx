@@ -39,7 +39,7 @@ export function Navbar({ site }: NavbarProps) {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <a
           href="#top"
-          className="font-display text-lg font-medium text-ink"
+          className="font-display text-lg font-semibold text-ink"
           aria-label={`${site.name} — back to top`}
         >
           {site.name}

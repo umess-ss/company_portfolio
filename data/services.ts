@@ -12,6 +12,11 @@ export const services: Service[] = [
       "Retrieval pipelines, document intelligence, and LLM-powered products — built on solid data foundations, deployed on your infrastructure.",
     icon: BrainCircuit,
     tags: ["FastAPI", "LangChain", "RAG", "PostgreSQL"],
+    deliverables: [
+      "RAG & document pipelines",
+      "Custom agents & copilots",
+      "Model evaluation & monitoring",
+    ],
   },
   {
     id: "custom-software",
@@ -20,6 +25,11 @@ export const services: Service[] = [
       "Web platforms, dashboards, and internal tools that replace spreadsheets and manual workflows with fast, reliable software.",
     icon: Code2,
     tags: ["Next.js", "TypeScript", "FastAPI", "Docker"],
+    deliverables: [
+      "Web platforms & dashboards",
+      "Internal tools & admin panels",
+      "API design & integrations",
+    ],
   },
   {
     id: "mobile-apps",
@@ -28,5 +38,10 @@ export const services: Service[] = [
       "Cross-platform apps that work in the real world — offline-first sync, low-end device performance, and app-store-ready polish.",
     icon: Smartphone,
     tags: ["React Native", "Flutter", "Expo", "Firebase"],
+    deliverables: [
+      "iOS & Android from one codebase",
+      "Offline-first sync",
+      "App-store release & maintenance",
+    ],
   },
 ];

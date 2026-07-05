@@ -4,6 +4,7 @@
  * from another module. All CSS custom properties live in globals.css.
  */
 import { Reveal } from "@/components/ui/reveal";
+import { SectionHeader } from "@/components/SectionHeader";
 import type { ProcessStep } from "@/lib/types";
 
 const STEPS: ProcessStep[] = [
@@ -41,14 +42,13 @@ const STEPS: ProcessStep[] = [
 
 export function Process() {
   return (
-    <section id="process" className="bg-paper py-24">
+    <section id="process" className="scroll-mt-24 bg-paper py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
-        <Reveal>
-          <p className="font-mono text-xs uppercase tracking-widest text-contour">
-            How we work
-          </p>
-        </Reveal>
-        <Reveal delay={90} className="mt-8 flex flex-col md:flex-row">
+        <SectionHeader
+          eyebrow="How we work"
+          title="From first call to production."
+        />
+        <Reveal delay={90} className="flex flex-col md:flex-row">
           {STEPS.map((step, i) => (
             <div key={step.number} className="flex flex-1 flex-col md:flex-row">
               {/* hairline divider between steps */}
@@ -59,11 +59,13 @@ export function Process() {
                 />
               )}
               <div className="flex-1">
-                <p className="font-mono text-sm text-contour">{step.number}</p>
+                <p className="font-mono text-sm text-contour-strong">
+                  {step.number}
+                </p>
                 <h3 className="mt-3 font-display text-lg font-medium text-ink">
                   {step.title}
                 </h3>
-                <p className="mt-2 font-body text-sm text-contour">
+                <p className="mt-2 font-body text-sm text-contour-strong">
                   {step.description}
                 </p>
               </div>
