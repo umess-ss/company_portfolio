@@ -89,7 +89,7 @@ export function Hero({ markerProjects, onMarkerClick }: HeroProps) {
             aria-label={`Open case study: ${project.title}`}
           >
             <span
-              className="size-3 shrink-0 rounded-full bg-signal ring-4 ring-signal/20 transition-transform group-hover:scale-125"
+              className="marker-dot size-3 shrink-0 rounded-full bg-signal ring-4 ring-signal/20"
               aria-hidden="true"
             />
             <span className="whitespace-nowrap font-mono text-xs text-contour-strong transition-colors group-hover:text-ink">
