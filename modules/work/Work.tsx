@@ -2,13 +2,12 @@
 
 /**
  * Owner: Govinda (@govinda)
- * Module rules: import only from data/, lib/, components/ui/ — never
+ * Module rules: import only from data/, lib/, components/ — never
  * from another module. All CSS custom properties live in globals.css.
  *
  * The case study dialog is controlled from page.tsx (openSlug) so the
  * hero's contour markers can open it without cross-module imports.
  */
-import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import {
   Dialog,
@@ -18,6 +17,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Reveal } from "@/components/ui/reveal";
+import { ProductFrame } from "@/components/ProductFrame";
+import { SectionHeader } from "@/components/SectionHeader";
 import type { Project } from "@/lib/types";
 
 export interface WorkProps {
@@ -34,36 +35,38 @@ const CASE_STUDY_SECTIONS = [
   ["Outcome", "outcomes"],
 ] as const;
 
+function projectMeta(project: Project) {
+  return `${project.serviceName} · ${project.year} · ${project.durationWeeks} weeks`;
+}
+
 export function Work({ projects, openSlug, onOpenChange }: WorkProps) {
   const openProject = projects.find((p) => p.slug === openSlug) ?? null;
 
   return (
-    <section id="work" className="bg-ink py-24 text-paper">
+    <section id="work" className="scroll-mt-24 bg-ink py-24 text-paper md:py-32">
       <div className="mx-auto max-w-6xl px-6">
-        <Reveal>
-          <p className="font-mono text-xs uppercase tracking-widest text-contour">
-            Selected work
-          </p>
-        </Reveal>
-        <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <SectionHeader
+          dark
+          eyebrow="Selected work"
+          title="Systems that are running right now."
+          intro="Four production systems across logistics, healthcare, legal, and finance — built end to end by this team."
+        />
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {projects.map((project, i) => (
             <Reveal key={project.id} delay={(i % 2) * 90} className="h-full">
               <button
                 type="button"
                 onClick={() => onOpenChange(project.slug)}
-                className="group h-full w-full cursor-pointer rounded-xl border border-paper/10 bg-paper/5 p-5 text-left transition-transform hover:-translate-y-1"
+                className="group h-full w-full cursor-pointer rounded-xl border border-paper/10 bg-paper/5 p-5 text-left transition hover:border-paper/30 hover:shadow-md"
                 aria-label={`View case study: ${project.title}`}
               >
                 <div className="relative aspect-8/5 w-full overflow-hidden rounded-lg">
-                  <Image
-                    src={`/placeholder/${project.slug}.svg`}
-                    alt={`${project.title} cover`}
-                    fill
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                    className="object-cover"
-                  />
+                  <ProductFrame screen={project.screen} />
                 </div>
-                <div className="mt-5 flex items-center gap-3">
+                <p className="mt-5 font-mono text-xs text-contour">
+                  {projectMeta(project)}
+                </p>
+                <div className="mt-2 flex items-center gap-3">
                   <span className="font-body text-sm text-contour">
                     {project.clientName ?? "Confidential"}
                   </span>
@@ -80,7 +83,7 @@ export function Work({ projects, openSlug, onOpenChange }: WorkProps) {
                 <p className="mt-2 font-body text-sm text-contour">
                   {project.summary}
                 </p>
-                <span className="mt-4 inline-block font-body text-sm text-signal">
+                <span className="mt-4 inline-block font-body text-sm text-signal underline decoration-signal/40 underline-offset-4 transition group-hover:decoration-signal">
                   View case study →
                 </span>
               </button>
@@ -99,8 +102,11 @@ export function Work({ projects, openSlug, onOpenChange }: WorkProps) {
         {openProject && (
           <DialogContent className="max-h-[85svh] max-w-2xl overflow-y-auto sm:max-w-2xl">
             <DialogHeader>
+              <p className="font-mono text-xs text-contour-strong">
+                {projectMeta(openProject)} · team of {openProject.teamSize}
+              </p>
               <div className="flex items-center gap-3">
-                <span className="font-body text-sm text-muted-foreground">
+                <span className="font-body text-sm text-contour-strong">
                   {openProject.clientName ?? "Confidential"}
                 </span>
                 <Badge
@@ -110,7 +116,7 @@ export function Work({ projects, openSlug, onOpenChange }: WorkProps) {
                   {openProject.serviceName}
                 </Badge>
               </div>
-              <DialogTitle className="font-display text-2xl text-ink">
+              <DialogTitle className="font-display text-2xl tracking-tight text-ink">
                 {openProject.title}
               </DialogTitle>
               <DialogDescription className="font-body">
@@ -118,20 +124,27 @@ export function Work({ projects, openSlug, onOpenChange }: WorkProps) {
               </DialogDescription>
             </DialogHeader>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            {/* metrics strip — the headline numbers, before any prose */}
+            <div className="grid grid-cols-1 gap-4 border-y border-contour/20 py-5 sm:grid-cols-3">
               {openProject.metrics.map((metric) => (
-                <div key={metric.label} className="rounded-lg bg-pine/5 p-4">
-                  <p className="font-mono text-lg text-ink">{metric.value}</p>
-                  <p className="mt-1 font-body text-xs text-muted-foreground">
+                <div key={metric.label}>
+                  <p className="font-mono text-xl text-ink md:text-2xl">
+                    {metric.value}
+                  </p>
+                  <p className="mt-1 font-body text-xs text-contour-strong">
                     {metric.label}
                   </p>
                 </div>
               ))}
             </div>
 
+            <div className="aspect-8/5 w-full overflow-hidden rounded-lg">
+              <ProductFrame screen={openProject.screen} />
+            </div>
+
             {CASE_STUDY_SECTIONS.map(([heading, key]) => (
               <div key={key}>
-                <h4 className="font-mono text-xs uppercase tracking-widest text-contour">
+                <h4 className="font-mono text-xs uppercase tracking-widest text-contour-strong">
                   {heading}
                 </h4>
                 <p className="mt-2 font-body text-sm leading-relaxed text-ink">
@@ -141,7 +154,7 @@ export function Work({ projects, openSlug, onOpenChange }: WorkProps) {
             ))}
 
             <div>
-              <h4 className="font-mono text-xs uppercase tracking-widest text-contour">
+              <h4 className="font-mono text-xs uppercase tracking-widest text-contour-strong">
                 Tech stack
               </h4>
               <div className="mt-2 flex flex-wrap gap-2">

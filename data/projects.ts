@@ -2,16 +2,20 @@ import type { Project } from "@/lib/types";
 
 /**
  * Shared file — changes require review from all 4 founders.
- * Placeholder case studies with realistic Kathmandu context;
- * replace with real projects on feat/work-real-projects.
+ * Client labels are sector descriptions until permission to name the
+ * org exists. Owner for named-client follow-up: Umesh.
  */
 export const projects: Project[] = [
   {
     id: "fleet-tracking",
     slug: "fleet-tracking-system",
     title: "Fleet Tracking System",
-    clientName: null,
+    // TODO: replace with named client where permission exists
+    clientName: "Regional logistics company · Kathmandu",
     serviceName: "Custom Software",
+    year: 2025,
+    durationWeeks: 14,
+    teamSize: 3,
     summary:
       "Real-time GPS tracking and automated reporting for a 400-vehicle logistics fleet.",
     problem:
@@ -28,14 +32,18 @@ export const projects: Project[] = [
       { label: "GPS events / day", value: "2M+" },
     ],
     techStack: ["FastAPI", "PostgreSQL", "Next.js", "Redis", "Docker"],
-    coverPlaceholderColor: "#1F4E46",
+    screen: "fleet",
   },
   {
     id: "hospital-appointments",
     slug: "hospital-appointment-platform",
     title: "Hospital Appointment Platform",
-    clientName: null,
+    // TODO: replace with named client where permission exists
+    clientName: "Private hospital group · Bagmati",
     serviceName: "Custom Software",
+    year: 2024,
+    durationWeeks: 10,
+    teamSize: 3,
     summary:
       "Online booking, SMS reminders, and queue management for 12,000 monthly hospital visits.",
     problem:
@@ -52,14 +60,18 @@ export const projects: Project[] = [
       { label: "waitlist backfill", value: "auto" },
     ],
     techStack: ["Next.js", "FastAPI", "PostgreSQL", "Twilio", "Docker"],
-    coverPlaceholderColor: "#8FA6B3",
+    screen: "hospital",
   },
   {
     id: "ai-document-classifier",
     slug: "ai-document-classifier",
     title: "AI Document Classifier",
-    clientName: "Confidential",
+    // TODO: replace with named client where permission exists
+    clientName: "Law firm · Kathmandu",
     serviceName: "AI Systems",
+    year: 2026,
+    durationWeeks: 12,
+    teamSize: 2,
     summary:
       "Automated intake classification and routing of 5,000 legal documents per day at 94% accuracy.",
     problem:
@@ -76,14 +88,18 @@ export const projects: Project[] = [
       { label: "human review load", value: "-81%" },
     ],
     techStack: ["FastAPI", "LangChain", "PostgreSQL", "Tesseract", "RAG"],
-    coverPlaceholderColor: "#E4572E",
+    screen: "docs",
   },
   {
     id: "mobile-banking",
     slug: "mobile-banking-app",
     title: "Mobile Banking App",
-    clientName: null,
+    // TODO: replace with named client where permission exists
+    clientName: "Microfinance institution · Nepal",
     serviceName: "Mobile Apps",
+    year: 2024,
+    durationWeeks: 16,
+    teamSize: 4,
     summary:
       "Offline-first mobile banking for 50,000 users across rural Nepal.",
     problem:
@@ -100,6 +116,6 @@ export const projects: Project[] = [
       { label: "min Android", value: "Go 8.1" },
     ],
     techStack: ["React Native", "Expo", "Firebase", "FastAPI", "PostgreSQL"],
-    coverPlaceholderColor: "#111B26",
+    screen: "banking",
   },
 ];

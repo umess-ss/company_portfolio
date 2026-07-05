@@ -12,9 +12,13 @@
 :root {
   --ink:     #111B26;   /* primary text / dark sections */
   --paper:   #F7F9F8;   /* page background              */
-  --contour: #8FA6B3;   /* hairlines, muted text        */
+  --contour: #8FA6B3;   /* hairlines; muted text on DARK backgrounds only */
   --signal:  #E4572E;   /* ONLY for CTAs, links, markers */
   --pine:    #1F4E46;   /* tags, footer background      */
+
+  /* Muted text on light backgrounds. --contour is 2.4:1 on paper (fails
+     WCAG AA); this darker step measures 4.6:1. Hairlines keep --contour. */
+  --contour-strong: #5F7482;
 }
 
 @theme {
@@ -23,6 +27,7 @@
   --color-contour: var(--contour);
   --color-signal:  var(--signal);
   --color-pine:    var(--pine);
+  --color-contour-strong: var(--contour-strong);
 }
 
 /* Fonts come from next/font/google variables set on <html> in app/layout.tsx */
