@@ -13,7 +13,7 @@
   --ink:     #111B26;   /* primary text / dark sections */
   --paper:   #F7F9F8;   /* page background              */
   --contour: #8FA6B3;   /* hairlines; muted text on DARK backgrounds only */
-  --signal:  #E4572E;   /* ONLY for CTAs, links, markers */
+  --signal:  #2563EB;   /* ONLY for CTAs, links, markers */
   --pine:    #1F4E46;   /* tags, footer background      */
 
   /* Muted text on light backgrounds. --contour is 2.4:1 on paper (fails
