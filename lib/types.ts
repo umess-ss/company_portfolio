@@ -29,6 +29,15 @@ export interface Service {
   deliverables: string[];
 }
 
+export interface Technology {
+  id: string;
+  name: string;
+  label: string;
+  summary: string;
+  badge: string;
+  accent: string;
+}
+
 export interface ProjectMetric {
   label: string;
   value: string;
