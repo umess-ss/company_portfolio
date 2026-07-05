@@ -90,7 +90,7 @@ export function Contact({ site }: ContactProps) {
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-6 lg:grid-cols-5">
         <div className="lg:col-span-2">
           <SectionHeader
-            eyebrow="Start a project"
+            eyebrow="Contact us"
             title="Tell us what you're building."
             className="mb-6 md:mb-8"
           />
