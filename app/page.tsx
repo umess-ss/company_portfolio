@@ -50,7 +50,7 @@ export default function Home() {
         <Process />
         <Testimonials testimonials={testimonials} />
         <Team members={team} />
-        <Contact />
+        <Contact site={site} />
       </main>
       <Footer site={site} />
     </>

@@ -7,12 +7,16 @@
  * properties live in globals.css.
  */
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Clock, MapPin } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
 import { submitContact } from "@/app/actions/contact";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { SectionHeader } from "@/components/SectionHeader";
+import type { SiteConfig } from "@/lib/types";
 import {
   Form,
   FormControl,
@@ -51,7 +55,11 @@ const contactSchema = z.object({
 
 type ContactFormValues = z.infer<typeof contactSchema>;
 
-export function Contact() {
+export interface ContactProps {
+  site: SiteConfig;
+}
+
+export function Contact({ site }: ContactProps) {
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
@@ -78,21 +86,43 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="bg-paper py-24">
-      <div className="mx-auto max-w-2xl px-6">
-        <Reveal>
-          <p className="font-mono text-xs uppercase tracking-widest text-contour">
-            Start a project
-          </p>
-          <h2 className="mt-4 font-display text-3xl font-medium text-ink">
-            Tell us what you&apos;re building.
-          </h2>
-        </Reveal>
-        <Reveal delay={90}>
-          <Form {...form}>
+    <section id="contact" className="scroll-mt-24 bg-paper py-24 md:py-32">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-6 lg:grid-cols-5">
+        <div className="lg:col-span-2">
+          <SectionHeader
+            eyebrow="Start a project"
+            title="Tell us what you're building."
+            className="mb-6 md:mb-8"
+          />
+          <Reveal delay={90} className="flex flex-col gap-5">
+            <p className="font-body text-contour-strong">
+              Send a short note about the problem you want solved. One of the
+              four of us — never a salesperson — reads it and replies with
+              honest next steps.
+            </p>
+            <a
+              href={`mailto:${site.email}`}
+              className="font-body text-signal underline decoration-signal/40 underline-offset-4 transition hover:decoration-signal"
+            >
+              {site.email}
+            </a>
+            <p className="flex items-center gap-2 font-body text-sm text-contour-strong">
+              <MapPin className="size-4 shrink-0 text-pine" aria-hidden="true" />
+              {site.location}
+            </p>
+            <p className="flex items-center gap-2 font-body text-sm text-contour-strong">
+              <Clock className="size-4 shrink-0 text-pine" aria-hidden="true" />
+              We reply {site.responseTime}
+            </p>
+          </Reveal>
+        </div>
+        <Reveal delay={180} className="lg:col-span-3">
+          <Card className="border-contour/20 bg-white p-8 shadow-sm">
+            <CardContent className="p-0">
+              <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="mt-10 flex flex-col gap-6"
+            className="flex flex-col gap-6"
             noValidate
           >
             <FormField
@@ -191,7 +221,9 @@ export function Contact() {
               {form.formState.isSubmitting ? "Sending…" : "Send message"}
             </Button>
           </form>
-          </Form>
+              </Form>
+            </CardContent>
+          </Card>
         </Reveal>
       </div>
     </section>
