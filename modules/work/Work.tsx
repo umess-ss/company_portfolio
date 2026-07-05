@@ -100,73 +100,79 @@ export function Work({ projects, openSlug, onOpenChange }: WorkProps) {
         }}
       >
         {openProject && (
-          <DialogContent className="max-h-[85svh] max-w-2xl overflow-y-auto sm:max-w-2xl">
-            <DialogHeader>
-              <p className="font-mono text-xs text-contour-strong">
-                {projectMeta(openProject)} · team of {openProject.teamSize}
-              </p>
-              <div className="flex items-center gap-3">
-                <span className="font-body text-sm text-contour-strong">
-                  {openProject.clientName ?? "Confidential"}
-                </span>
-                <Badge
-                  variant="outline"
-                  className="border-pine/20 bg-pine/10 font-mono text-xs text-pine"
-                >
-                  {openProject.serviceName}
-                </Badge>
-              </div>
-              <DialogTitle className="font-display text-2xl tracking-tight text-ink">
-                {openProject.title}
-              </DialogTitle>
-              <DialogDescription className="font-body">
-                {openProject.summary}
-              </DialogDescription>
-            </DialogHeader>
+          <DialogContent className="max-h-[90svh] max-w-5xl overflow-y-auto sm:max-w-5xl lg:max-w-6xl">
+            <div className="grid gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(18rem,0.95fr)] lg:items-start">
+              <div className="space-y-6">
+                <DialogHeader>
+                  <p className="font-mono text-xs text-contour-strong">
+                    {projectMeta(openProject)} · team of {openProject.teamSize}
+                  </p>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <span className="font-body text-sm text-contour-strong">
+                      {openProject.clientName ?? "Confidential"}
+                    </span>
+                    <Badge
+                      variant="outline"
+                      className="border-pine/20 bg-pine/10 font-mono text-xs text-pine"
+                    >
+                      {openProject.serviceName}
+                    </Badge>
+                  </div>
+                  <DialogTitle className="font-display text-2xl tracking-tight text-ink sm:text-3xl">
+                    {openProject.title}
+                  </DialogTitle>
+                  <DialogDescription className="max-w-2xl font-body text-sm text-contour-strong">
+                    {openProject.summary}
+                  </DialogDescription>
+                </DialogHeader>
 
-            {/* metrics strip — the headline numbers, before any prose */}
-            <div className="grid grid-cols-1 gap-4 border-y border-contour/20 py-5 sm:grid-cols-3">
-              {openProject.metrics.map((metric) => (
-                <div key={metric.label}>
-                  <p className="font-mono text-xl text-ink md:text-2xl">
-                    {metric.value}
-                  </p>
-                  <p className="mt-1 font-body text-xs text-contour-strong">
-                    {metric.label}
-                  </p>
+                {/* metrics strip — the headline numbers, before any prose */}
+                <div className="grid grid-cols-1 gap-4 border-y border-contour/20 py-5 sm:grid-cols-3">
+                  {openProject.metrics.map((metric) => (
+                    <div key={metric.label}>
+                      <p className="font-mono text-xl text-ink md:text-2xl">
+                        {metric.value}
+                      </p>
+                      <p className="mt-1 font-body text-xs text-contour-strong">
+                        {metric.label}
+                      </p>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
 
-            <div className="aspect-8/5 w-full overflow-hidden rounded-lg">
-              <ProductFrame screen={openProject.screen} />
-            </div>
-
-            {CASE_STUDY_SECTIONS.map(([heading, key]) => (
-              <div key={key}>
-                <h4 className="font-mono text-xs uppercase tracking-widest text-contour-strong">
-                  {heading}
-                </h4>
-                <p className="mt-2 font-body text-sm leading-relaxed text-ink">
-                  {openProject[key]}
-                </p>
-              </div>
-            ))}
-
-            <div>
-              <h4 className="font-mono text-xs uppercase tracking-widest text-contour-strong">
-                Tech stack
-              </h4>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {openProject.techStack.map((tech) => (
-                  <Badge
-                    key={tech}
-                    variant="outline"
-                    className="border-pine/20 bg-pine/10 font-mono text-xs text-pine"
-                  >
-                    {tech}
-                  </Badge>
+                {CASE_STUDY_SECTIONS.map(([heading, key]) => (
+                  <div key={key}>
+                    <h4 className="font-mono text-xs uppercase tracking-widest text-contour-strong">
+                      {heading}
+                    </h4>
+                    <p className="mt-2 font-body text-sm leading-relaxed text-ink">
+                      {openProject[key]}
+                    </p>
+                  </div>
                 ))}
+
+                <div>
+                  <h4 className="font-mono text-xs uppercase tracking-widest text-contour-strong">
+                    Tech stack
+                  </h4>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {openProject.techStack.map((tech) => (
+                      <Badge
+                        key={tech}
+                        variant="outline"
+                        className="border-pine/20 bg-pine/10 font-mono text-xs text-pine"
+                      >
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="lg:sticky lg:top-0 lg:self-start">
+                <div className="aspect-[4/5] w-full overflow-hidden rounded-lg bg-contour/10 p-2 sm:aspect-[5/6] lg:aspect-auto lg:min-h-[32rem]">
+                  <ProductFrame screen={openProject.screen} />
+                </div>
               </div>
             </div>
           </DialogContent>
