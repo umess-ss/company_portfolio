@@ -26,6 +26,7 @@ export interface Service {
   description: string;
   icon: LucideIcon;
   tags: string[];
+  deliverables: string[];
 }
 
 export interface ProjectMetric {
