@@ -34,7 +34,7 @@ export const projects: Project[] = [
       { label: "GPS events / day", value: "2M+" },
     ],
     techStack: ["FastAPI", "PostgreSQL", "Next.js", "Redis", "Docker"],
-    coverImage: "/projects/fleet-tracking.png",
+    coverImage: "/company_portfolio/projects/fleet-tracking.png",
     screen: "fleet",
   },
   {
@@ -65,7 +65,7 @@ export const projects: Project[] = [
       { label: "waitlist backfill", value: "auto" },
     ],
     techStack: ["Next.js", "FastAPI", "PostgreSQL", "Twilio", "Docker"],
-    coverImage: "/projects/hospital-appointments.png",
+    coverImage: "/company_portfolio/projects/hospital-appointments.png",
     screen: "hospital",
   },
   {
@@ -96,7 +96,7 @@ export const projects: Project[] = [
       { label: "human review load", value: "-81%" },
     ],
     techStack: ["FastAPI", "LangChain", "PostgreSQL", "Tesseract", "RAG"],
-    coverImage: "/projects/ai-document-classifier.png",
+    coverImage: "/company_portfolio/projects/ai-document-classifier.png",
     screen: "docs",
   },
   {
@@ -127,7 +127,7 @@ export const projects: Project[] = [
       { label: "min Android", value: "Go 8.1" },
     ],
     techStack: ["React Native", "Expo", "Firebase", "FastAPI", "PostgreSQL"],
-    coverImage: "/projects/mobile-banking.png",
+    coverImage: "/company_portfolio/projects/mobile-banking.png",
     screen: "banking",
   },
 ];

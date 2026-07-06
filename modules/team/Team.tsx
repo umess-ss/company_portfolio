@@ -51,7 +51,7 @@ export function Team({ members }: TeamProps) {
                 {/* Photo — rounded corners, subtle bg */}
                 <div className="relative mb-5 aspect-[4/5] w-full overflow-hidden rounded-2xl bg-contour/20">
                   <Image
-                    src={member.photo ?? "/team/placeholder.svg"}
+                    src={member.photo ?? "/company_portfolio/team/placeholder.svg"}
                     alt={`Photo of ${member.name}`}
                     fill
                     unoptimized
