@@ -343,8 +343,8 @@ export function Navbar({ site }: NavbarProps) {
             aria-label="Home"
             className="font-display text-lg font-bold tracking-tight"
           >
-            <span className="text-signal">Studio</span>
-            <span className="text-ink">KTM</span>
+            <span className="text-signal">A1</span>
+            <span className="text-ink">Star</span>
           </Link>
 
           {/* Desktop nav */}

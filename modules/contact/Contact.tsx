@@ -120,6 +120,18 @@ export function Contact({ site }: ContactProps) {
               <Clock className="size-4 shrink-0 text-signal" aria-hidden="true" />
               We reply {site.responseTime}
             </p>
+            <div className="mt-4 overflow-hidden rounded-xl border border-contour/60 shadow-sm">
+              <iframe
+                title="Office Location"
+                src="https://maps.google.com/maps?width=100%25&amp;height=300&amp;hl=en&amp;q=Advanced%20College%20of%20Engg.%20Management+(Advanced%20College%20of%20Engg.%20Management)&amp;t=&amp;z=17&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                width="100%"
+                height="300"
+                style={{ border: 0 }}
+                allowFullScreen={false}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
           </Reveal>
         </div>
         <Reveal delay={180} className="lg:col-span-3">
