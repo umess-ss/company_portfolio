@@ -3,7 +3,7 @@ import type { SiteConfig } from "@/lib/types";
 /**
  * Shared file — changes require review from all 4 founders.
  * "Studio KTM" is a placeholder name; founders will rename.
- * Email is a placeholder domain — set up the real mailbox (owner: Anish).
+ * Email is a placeholder domain — set up the real mailbox.
  */
 export const site: SiteConfig = {
   name: "Studio KTM",
