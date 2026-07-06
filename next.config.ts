@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   basePath: process.env.BASE_PATH || '',
   images: {
     unoptimized: true,
+    loader: 'default',
   },
   // Pin the workspace root — a stray lockfile in a parent directory
   // otherwise makes Turbopack infer the wrong root.
