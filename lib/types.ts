@@ -11,10 +11,11 @@ export interface SiteConfig {
   description: string;
   url: string;
   email: string;
+  phone: string;
   location: string;
   responseTime: string;
   foundedYear: number;
-  social: {
+  social:{
     github: string;
     linkedin: string;
   };
