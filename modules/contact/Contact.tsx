@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Owner: Anish (@anish)
+
  * Module rules: import only from data/, lib/, components/ — never
  * from another module. All CSS custom properties live in globals.css.
  *
