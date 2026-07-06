@@ -98,7 +98,7 @@ export function Services({ services, expanded = false }: ServicesProps) {
           <Reveal className="mt-10 text-center">
             <Button
               variant="outline"
-              className="border-contour px-6"
+              className="px-6"
               onClick={() => setShowAll((s) => !s)}
             >
               {showAll

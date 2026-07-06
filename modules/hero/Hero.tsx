@@ -76,15 +76,15 @@ export function Hero({ site }: HeroProps) {
           <Button
             asChild
             size="lg"
-            className="px-7 text-base"
+            className="text-base"
           >
-            <a href="#contact">Start a project</a>
+            <a href="#contact">Talk to an Expert</a>
           </Button>
           <Button
             asChild
             size="lg"
-            variant="outline"
-            className="border-contour px-7 text-base"
+            variant="secondary"
+            className="text-base"
           >
             <a href="#work">See our work →</a>
           </Button>

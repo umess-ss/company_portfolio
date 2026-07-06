@@ -9,7 +9,7 @@
  * visitor's mail client with a pre-filled message (no backend).
  */
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Clock, MapPin } from "lucide-react";
+import { Clock, MapPin, Phone } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -51,6 +51,7 @@ const SERVICE_OPTIONS = [
 const contactSchema = z.object({
   name: z.string().min(2, "Please enter at least 2 characters."),
   email: z.string().email("Please enter a valid email address."),
+  phone: z.string().min(1, "Please enter your phone number."),
   serviceInterest: z.enum(SERVICE_OPTIONS, {
     message: "Please choose a service.",
   }),
@@ -70,6 +71,7 @@ export function Contact({ site }: ContactProps) {
     defaultValues: {
       name: "",
       email: "",
+      phone: "",
       serviceInterest: undefined,
       message: "",
       _honeypot: "",
@@ -116,6 +118,13 @@ export function Contact({ site }: ContactProps) {
               <MapPin className="size-4 shrink-0 text-signal" aria-hidden="true" />
               {site.location}
             </p>
+            <a
+              href={`tel:${site.phone}`}
+              className="flex items-center gap-2 font-body text-sm text-signal underline decoration-signal/40 underline-offset-4 transition hover:decoration-signal"
+            >
+              <Phone className="size-4 shrink-0" aria-hidden="true" />
+              {site.phone}
+            </a>
             <p className="flex items-center gap-2 font-body text-sm text-contour-strong">
               <Clock className="size-4 shrink-0 text-signal" aria-hidden="true" />
               We reply {site.responseTime}
@@ -169,8 +178,26 @@ export function Contact({ site }: ContactProps) {
                         <FormControl>
                           <Input
                             type="email"
-                            placeholder="you@company.com"
+                            placeholder="name@gmail.com"
                             autoComplete="email"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage className="text-sm text-destructive" />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="font-body text-ink">Phone</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="tel"
+                            placeholder="9812345678"
+                            autoComplete="tel"
                             {...field}
                           />
                         </FormControl>

@@ -12,6 +12,7 @@ export const site: SiteConfig = {
     "A 4-person senior software studio in Kathmandu, Nepal building AI systems, custom software, and mobile apps. We design it. We build it. We ship it.",
   url: "https://studioktm.example.com",
   email: "hello@studioktm.com",
+  phone: "+977-1-5555555",
   location: "Kathmandu, Nepal",
   responseTime: "within 24 hours",
   foundedYear: 2024,
