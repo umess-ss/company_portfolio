@@ -187,7 +187,7 @@ export function Work({ projects, expanded = false }: WorkProps) {
           <Reveal className="mt-10 text-center">
             <Button
               variant="outline"
-              className="border-contour px-6"
+              className="px-6"
               onClick={() => setShowAll((s) => !s)}
             >
               {showAll ? "Show fewer" : `View all projects (${filtered.length})`}

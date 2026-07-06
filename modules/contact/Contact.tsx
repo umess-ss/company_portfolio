@@ -178,7 +178,7 @@ export function Contact({ site }: ContactProps) {
                         <FormControl>
                           <Input
                             type="email"
-                            placeholder="you@company.com"
+                            placeholder="name@gmail.com"
                             autoComplete="email"
                             {...field}
                           />
@@ -196,7 +196,7 @@ export function Contact({ site }: ContactProps) {
                         <FormControl>
                           <Input
                             type="tel"
-                            placeholder="+977-1-5555555"
+                            placeholder="9812345678"
                             autoComplete="tel"
                             {...field}
                           />

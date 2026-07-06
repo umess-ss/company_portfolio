@@ -327,7 +327,7 @@ export function Navbar({ site }: NavbarProps) {
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header className="fixed inset-x-0 top-0 z-50 h-16">
       {/* ── Top bar ─────────────────────────────────────────────── */}
       <div
         className={`transition-all duration-300 ${
