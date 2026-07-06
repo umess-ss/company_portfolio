@@ -1,8 +1,24 @@
+"use client";
+
 /**
  * Owner: Anish (@anish)
- * Module rules: import only from data/, lib/, components/ui/ — never
+ * Module rules: import only from data/, lib/, components/ — never
  * from another module. All CSS custom properties live in globals.css.
+ *
+ * "How we work" — seven-step delivery process rendered as a vertical
+ * timeline whose spine fills in as the section scrolls past.
  */
+import {
+  ClipboardList,
+  Code2,
+  LifeBuoy,
+  Map,
+  Palette,
+  Rocket,
+  ShieldCheck,
+} from "lucide-react";
+import { motion, useReducedMotion, useScroll, useSpring } from "motion/react";
+import { useRef } from "react";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import type { ProcessStep } from "@/lib/types";
@@ -10,68 +26,108 @@ import type { ProcessStep } from "@/lib/types";
 const STEPS: ProcessStep[] = [
   {
     number: "01",
-    title: "Discover",
+    title: "Requirement Gathering",
     description:
-      "We sit with your team, map the real workflow, and agree on what success measurably looks like.",
+      "We understand your needs, goals, and expectations to define the right solution.",
+    icon: ClipboardList,
   },
   {
     number: "02",
-    title: "Design",
+    title: "Planning & Strategy",
     description:
-      "Flows, data models, and interfaces are sketched and pressure-tested before a line of production code.",
+      "We create a roadmap with features, timelines, and technology to ensure smooth execution.",
+    icon: Map,
   },
   {
     number: "03",
-    title: "Build",
+    title: "Design Phase",
     description:
-      "Short iterations with working software every week — you see progress, not status reports.",
+      "Our team designs a clean, modern, and user-friendly interface for your approval.",
+    icon: Palette,
   },
   {
     number: "04",
-    title: "Ship",
+    title: "Development",
     description:
-      "We deploy to production, migrate data, and train the people who will use it daily.",
+      "We build the system — website, app, or software — using the latest tools and best coding practices.",
+    icon: Code2,
   },
   {
     number: "05",
-    title: "Support",
+    title: "Testing & Quality Check",
     description:
-      "Monitoring, fixes, and steady improvements after launch — we stay accountable for what we built.",
+      "We thoroughly test for performance, security, speed, and user experience to ensure perfection.",
+    icon: ShieldCheck,
+  },
+  {
+    number: "06",
+    title: "Deployment & Launch",
+    description:
+      "Your project goes live with complete setup and configuration.",
+    icon: Rocket,
+  },
+  {
+    number: "07",
+    title: "Support & Maintenance",
+    description:
+      "We continue to assist with updates, improvements, and technical support whenever needed.",
+    icon: LifeBuoy,
   },
 ];
 
 export function Process() {
+  const timelineRef = useRef<HTMLOListElement>(null);
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 0.75", "end 0.6"],
+  });
+  const spineScale = useSpring(scrollYProgress, { stiffness: 90, damping: 24 });
+
   return (
     <section id="process" className="scroll-mt-24 bg-paper py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <SectionHeader
           eyebrow="How we work"
-          title="From first call to production."
+          title="From first call to launch — and beyond."
+          intro="A clear seven-step process so you always know where your project stands."
         />
-        <Reveal delay={90} className="flex flex-col md:flex-row">
-          {STEPS.map((step, i) => (
-            <div key={step.number} className="flex flex-1 flex-col md:flex-row">
-              {/* hairline divider between steps */}
-              {i > 0 && (
-                <div
-                  className="my-6 h-px w-full bg-contour/30 md:mx-6 md:my-0 md:h-auto md:w-px md:self-stretch"
-                  aria-hidden="true"
-                />
-              )}
-              <div className="flex-1">
-                <p className="font-mono text-sm text-contour-strong">
-                  {step.number}
-                </p>
-                <h3 className="mt-3 font-display text-lg font-medium text-ink">
-                  {step.title}
-                </h3>
-                <p className="mt-2 font-body text-sm text-contour-strong">
-                  {step.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </Reveal>
+        <ol ref={timelineRef} className="relative mx-auto max-w-3xl">
+          {/* Timeline spine + scroll-linked progress fill */}
+          <div
+            className="absolute bottom-6 left-[1.4rem] top-2 w-px bg-contour"
+            aria-hidden="true"
+          />
+          <motion.div
+            className="absolute bottom-6 left-[1.4rem] top-2 w-px origin-top bg-signal"
+            style={{ scaleY: reduceMotion ? 1 : spineScale }}
+            aria-hidden="true"
+          />
+          {STEPS.map((step, i) => {
+            const Icon = step.icon;
+            return (
+              <li key={step.number} className="relative pb-12 pl-16 last:pb-0">
+                <Reveal delay={i * 60}>
+                  <span
+                    className="absolute left-0 top-0 flex size-11 items-center justify-center rounded-full border border-contour/70 bg-card text-signal shadow-sm"
+                    aria-hidden="true"
+                  >
+                    <Icon className="size-5" />
+                  </span>
+                  <p className="font-mono text-xs tracking-widest text-signal">
+                    STEP {step.number}
+                  </p>
+                  <h3 className="mt-2 font-display text-xl font-medium text-ink">
+                    {step.title}
+                  </h3>
+                  <p className="mt-2 max-w-xl font-body text-sm leading-6 text-contour-strong">
+                    {step.description}
+                  </p>
+                </Reveal>
+              </li>
+            );
+          })}
+        </ol>
       </div>
     </section>
   );

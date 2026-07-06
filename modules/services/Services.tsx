@@ -1,80 +1,112 @@
+"use client";
+
 /**
  * Owner: Govinda (@govinda)
  * Module rules: import only from data/, lib/, components/ — never
  * from another module. All CSS custom properties live in globals.css.
+ *
+ * Minimal services grid: four cards up front, the rest behind a
+ * "View all" toggle.
  */
-import { Check } from "lucide-react";
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/SectionHeader";
+import {
+  BrainCircuit,
+  Code2,
+  GraduationCap,
+  Megaphone,
+  MessageSquareText,
+  PenTool,
+  Search,
+  Smartphone,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import type { Service } from "@/lib/types";
+
+const iconMap: Record<string, LucideIcon> = {
+  BrainCircuit,
+  Code2,
+  GraduationCap,
+  Megaphone,
+  MessageSquareText,
+  PenTool,
+  Search,
+  Smartphone,
+};
 
 export interface ServicesProps {
   services: Service[];
+  /** Render every service up front (dedicated /services page). */
+  expanded?: boolean;
 }
 
-export function Services({ services }: ServicesProps) {
+const INITIAL_COUNT = 4;
+
+export function Services({ services, expanded = false }: ServicesProps) {
+  const [showAll, setShowAll] = useState(expanded);
+  const visible = showAll ? services : services.slice(0, INITIAL_COUNT);
+
   return (
     <section id="services" className="scroll-mt-24 bg-paper py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <SectionHeader
           eyebrow="What we build"
-          title="Three disciplines, one team."
-          intro="Every project is scoped, designed, built, and shipped by fully skilled Engineers — no handoffs, no subcontractors."
+          title="Software, end to end."
+          intro="Scoped, designed, built, and shipped by senior engineers — no subcontractors."
         />
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {services.map((service, i) => {
-            const Icon = service.icon;
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          {visible.map((service, i) => {
+            const Icon = iconMap[service.iconName];
             return (
-              <Reveal key={service.id} delay={i * 90} className="h-full">
-                <Card className="h-full border-contour/20 bg-white transition hover:border-contour/50 hover:shadow-md">
-                  <CardHeader>
-                    <Icon className="size-6 text-ink" aria-hidden="true" />
-                    <CardTitle className="mt-4 font-display text-xl font-medium text-ink">
-                      {service.name}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="flex flex-col gap-5">
-                    <p className="font-body text-contour-strong">
-                      {service.description}
-                    </p>
-                    <ul className="flex flex-col gap-2">
-                      {service.deliverables.map((deliverable) => (
-                        <li
-                          key={deliverable}
-                          className="flex items-start gap-2 font-body text-sm text-ink/80"
-                        >
-                          <Check
-                            className="mt-0.5 size-4 shrink-0 text-pine"
-                            aria-hidden="true"
-                          />
-                          {deliverable}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="flex flex-wrap gap-2">
-                      {service.tags.map((tag) => (
-                        <Badge
-                          key={tag}
-                          variant="outline"
-                          className="border-pine/20 bg-pine/10 font-mono text-xs text-pine"
-                        >
-                          {tag}
-                        </Badge>
-                      ))}
+              <Reveal key={service.id} delay={(i % 2) * 90} className="h-full">
+                <article className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-2xl border border-contour/60 bg-card p-6 transition duration-300 hover:-translate-y-1 hover:border-signal/40 hover:shadow-xl hover:shadow-signal/5">
+                  <div
+                    className="absolute -right-10 -top-10 size-28 rounded-full bg-signal/10 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100"
+                    aria-hidden="true"
+                  />
+                  <div className="flex items-center gap-4">
+                    <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-signal/10 text-signal">
+                      <Icon className="size-5" aria-hidden="true" />
                     </div>
-                  </CardContent>
-                </Card>
+                    <h3 className="font-display text-xl font-medium text-ink">
+                      {service.name}
+                    </h3>
+                  </div>
+                  <p className="font-body text-sm leading-6 text-contour-strong">
+                    {service.description}
+                  </p>
+                  <div className="mt-auto flex flex-wrap gap-2 pt-1">
+                    {service.tags.map((tag) => (
+                      <Badge
+                        key={tag}
+                        variant="outline"
+                        className="border-pine/25 bg-pine/10 font-mono text-xs text-pine"
+                      >
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                </article>
               </Reveal>
             );
           })}
         </div>
+        {!expanded && services.length > INITIAL_COUNT && (
+          <Reveal className="mt-10 text-center">
+            <Button
+              variant="outline"
+              className="border-contour px-6"
+              onClick={() => setShowAll((s) => !s)}
+            >
+              {showAll
+                ? "Show fewer"
+                : `View all services (${services.length})`}
+            </Button>
+          </Reveal>
+        )}
       </div>
     </section>
   );

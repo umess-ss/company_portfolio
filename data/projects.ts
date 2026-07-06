@@ -13,6 +13,8 @@ export const projects: Project[] = [
     // TODO: replace with named client where permission exists
     clientName: "Regional logistics company · Kathmandu",
     serviceName: "Custom Software",
+    category: "Technology",
+    date: "March 15, 2025",
     year: 2025,
     durationWeeks: 14,
     teamSize: 3,
@@ -32,6 +34,7 @@ export const projects: Project[] = [
       { label: "GPS events / day", value: "2M+" },
     ],
     techStack: ["FastAPI", "PostgreSQL", "Next.js", "Redis", "Docker"],
+    coverImage: "/projects/fleet-tracking.png",
     screen: "fleet",
   },
   {
@@ -41,6 +44,8 @@ export const projects: Project[] = [
     // TODO: replace with named client where permission exists
     clientName: "Private hospital group · Bagmati",
     serviceName: "Custom Software",
+    category: "Digital Transformation",
+    date: "August 22, 2024",
     year: 2024,
     durationWeeks: 10,
     teamSize: 3,
@@ -60,6 +65,7 @@ export const projects: Project[] = [
       { label: "waitlist backfill", value: "auto" },
     ],
     techStack: ["Next.js", "FastAPI", "PostgreSQL", "Twilio", "Docker"],
+    coverImage: "/projects/hospital-appointments.png",
     screen: "hospital",
   },
   {
@@ -69,6 +75,8 @@ export const projects: Project[] = [
     // TODO: replace with named client where permission exists
     clientName: "Law firm · Kathmandu",
     serviceName: "AI Systems",
+    category: "Technology",
+    date: "January 10, 2026",
     year: 2026,
     durationWeeks: 12,
     teamSize: 2,
@@ -88,6 +96,7 @@ export const projects: Project[] = [
       { label: "human review load", value: "-81%" },
     ],
     techStack: ["FastAPI", "LangChain", "PostgreSQL", "Tesseract", "RAG"],
+    coverImage: "/projects/ai-document-classifier.png",
     screen: "docs",
   },
   {
@@ -97,6 +106,8 @@ export const projects: Project[] = [
     // TODO: replace with named client where permission exists
     clientName: "Microfinance institution · Nepal",
     serviceName: "Mobile Apps",
+    category: "Product Management",
+    date: "November 05, 2024",
     year: 2024,
     durationWeeks: 16,
     teamSize: 4,
@@ -116,6 +127,7 @@ export const projects: Project[] = [
       { label: "min Android", value: "Go 8.1" },
     ],
     techStack: ["React Native", "Expo", "Firebase", "FastAPI", "PostgreSQL"],
+    coverImage: "/projects/mobile-banking.png",
     screen: "banking",
   },
 ];
