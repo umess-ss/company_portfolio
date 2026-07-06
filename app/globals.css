@@ -8,17 +8,34 @@
  * Brand design tokens — single source of truth.
  * Rule: globals.css owns ALL CSS custom properties.
  * Modules must never define :root variables of their own.
+ *
+ * Every brand token is theme-aware: it flips under `.dark`, so modules
+ * only ever use the semantic names (ink, paper, contour, signal, pine).
  */
 :root {
-  --ink:     #111B26;   /* primary text / dark sections */
-  --paper:   #F7F9F8;   /* page background              */
-  --contour: #8FA6B3;   /* hairlines; muted text on DARK backgrounds only */
-  --signal:  #2563EB;   /* ONLY for CTAs, links, markers */
-  --pine:    #1F4E46;   /* tags, footer background      */
+  --ink:     #0F172A;   /* primary text                        */
+  --paper:   #F8FAFC;   /* page background                     */
+  --contour: #DBE1EA;   /* hairlines and subtle borders        */
+  --signal:  #0B5CFF;   /* accent — CTAs, links, highlights    */
+  --pine:    #1D4ED8;   /* tags, secondary accent              */
 
-  /* Muted text on light backgrounds. --contour is 2.4:1 on paper (fails
-     WCAG AA); this darker step measures 4.6:1. Hairlines keep --contour. */
-  --contour-strong: #5F7482;
+  /* Muted body text — 7:1 on paper */
+  --contour-strong: #51607A;
+
+  /* Accent gradient endpoints (hero headline, CTA glow) */
+  --signal-soft: #55A2FF;
+  --amber-soft:  #7CE7FF;
+}
+
+.dark {
+  --ink:     #F1F5F9;
+  --paper:   #0A0E16;
+  --contour: #212A3B;
+  --signal:  #5B8CFF;
+  --pine:    #93B4FF;
+  --contour-strong: #93A1B8;
+  --signal-soft: #7FB0FF;
+  --amber-soft:  #8FEBFF;
 }
 
 @theme {
@@ -28,6 +45,8 @@
   --color-signal:  var(--signal);
   --color-pine:    var(--pine);
   --color-contour-strong: var(--contour-strong);
+  --color-signal-soft: var(--signal-soft);
+  --color-amber-soft:  var(--amber-soft);
 }
 
 /* Fonts come from next/font/google variables set on <html> in app/layout.tsx */
@@ -80,71 +99,72 @@
 :root {
   --background: var(--paper);
   --foreground: var(--ink);
-  --card: oklch(1 0 0);
+  --card: #FFFFFF;
   --card-foreground: var(--ink);
-  --popover: oklch(1 0 0);
+  --popover: #FFFFFF;
   --popover-foreground: var(--ink);
-  /* shadcn primary = brand signal so the default Button is signal-colored */
-  --primary: var(--signal);
+  /* shadcn primary = Zoom-style action blue in BOTH themes so buttons
+     always render the same saturated blue with white text */
+  --primary: #0B5CFF;
   --primary-foreground: #FFFFFF;
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --secondary: #EEF2F7;
+  --secondary-foreground: #1E293B;
+  --muted: #EEF2F7;
+  --muted-foreground: var(--contour-strong);
+  --accent: #EDF3FF;
+  --accent-foreground: #1D4ED8;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: var(--signal);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
+  --border: #E2E8F0;
+  --input: #E2E8F0;
+  --ring: #0B5CFF;
+  --chart-1: #0B5CFF;
+  --chart-2: #51607A;
+  --chart-3: #7CE7FF;
+  --chart-4: #93A1B8;
+  --chart-5: #1E293B;
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar: #F8FAFC;
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: #0B5CFF;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #EEF2F7;
+  --sidebar-accent-foreground: #1E293B;
+  --sidebar-border: #E2E8F0;
+  --sidebar-ring: #0B5CFF;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: #10151F;
+  --card-foreground: var(--ink);
+  --popover: #10151F;
+  --popover-foreground: var(--ink);
+  --primary: #0B5CFF;
+  --primary-foreground: #FFFFFF;
+  --secondary: #171E2C;
+  --secondary-foreground: #E2E8F0;
+  --muted: #171E2C;
+  --muted-foreground: var(--contour-strong);
+  --accent: #12203A;
+  --accent-foreground: #B0CAFF;
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --border: rgba(255, 255, 255, 0.09);
+  --input: rgba(255, 255, 255, 0.14);
+  --ring: #5B8CFF;
+  --chart-1: #5B8CFF;
+  --chart-2: #93A1B8;
+  --chart-3: #8FEBFF;
+  --chart-4: #51607A;
+  --chart-5: #E2E8F0;
+  --sidebar: #10151F;
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: #0B5CFF;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #171E2C;
+  --sidebar-accent-foreground: #E2E8F0;
+  --sidebar-border: rgba(255, 255, 255, 0.09);
+  --sidebar-ring: #5B8CFF;
 }
 
 @layer base {
@@ -171,25 +191,76 @@
 
 /* Sticky navbar offset for #section anchor jumps */
 section[id] {
-  scroll-margin-top: 4.5rem;
+  scroll-margin-top: 5.5rem;
 }
 
-/* ── Motion ──────────────────────────────────────────────────────────
-   All animation lives here: the hero contour drift, the hero intro
-   stagger, and the scroll-reveal used by sections. Everything pauses
-   under prefers-reduced-motion. */
+/* ── Surface helpers ────────────────────────────────────────────────── */
 
-@keyframes contour-drift {
+/* Pins the light-theme brand tokens regardless of .dark — used for
+   code-drawn product mockups that must read like light screenshots. */
+.force-light {
+  --ink:     #0F172A;
+  --paper:   #F8FAFC;
+  --contour: #DBE1EA;
+  --signal:  #0B5CFF;
+  --pine:    #1D4ED8;
+  --contour-strong: #51607A;
+}
+
+/* GSAP-style oversized outlined marquee type.
+   Longhand properties only — Lightning CSS drops the -webkit-text-stroke
+   shorthand when its color is a color-mix() expression. */
+.text-outline {
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: color-mix(in srgb, var(--ink) 40%, transparent);
+  color: transparent;
+}
+
+/* Faint blueprint grid used behind the hero and section accents */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--ink) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--ink) 5%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Accent gradient text — hero headline highlight, footer wordmark */
+.text-gradient {
+  background: linear-gradient(100deg, var(--signal) 0%, var(--signal-soft) 55%, var(--amber-soft) 130%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Frosted navbar / floating panels */
+.glass {
+  background: color-mix(in srgb, var(--paper) 78%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* ── Motion ─────────────────────────────────────────────────────────
+   CSS-driven animation lives here (marquee, orb float, scroll reveal).
+   Scroll-linked and stagger animation lives in components/motion/*.
+   Everything pauses under prefers-reduced-motion. */
+
+@keyframes marquee {
   from {
-    transform: translate(0px, 0px);
+    transform: translateX(0);
   }
   to {
-    transform: translate(6px, -4px);
+    transform: translateX(-50%);
   }
 }
 
-.contour-drift {
-  animation: contour-drift 20s ease-in-out infinite alternate;
+@keyframes orb-float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(28px, -22px) scale(1.06);
+  }
 }
 
 @keyframes fade-up {
@@ -204,18 +275,24 @@ section[id] {
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  .marquee-track {
+    animation: marquee var(--marquee-duration, 32s) linear infinite;
+  }
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  .orb-float {
+    animation: orb-float 16s ease-in-out infinite;
+  }
+  .orb-float-late {
+    animation: orb-float 22s ease-in-out -8s infinite reverse;
+  }
+
   /* Hero intro — staggered via --intro-step set inline */
   .intro-fade {
     animation: fade-up 0.7s ease-out both;
     animation-delay: calc(var(--intro-step, 0) * 120ms);
-  }
-
-  /* Hero project-marker dot — the only hover transform on the page */
-  .marker-dot {
-    transition: transform 0.2s ease-out;
-  }
-  .group:hover .marker-dot {
-    transform: scale(1.25);
   }
 
   /* Scroll reveal — hidden state only applies once JS has stamped
@@ -234,16 +311,14 @@ section[id] {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .contour-drift {
-    animation: none;
-  }
   html {
     scroll-behavior: auto;
   }
-}
-
-/* Respect reduced motion — reveals render visible with no movement */
-@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .orb-float,
+  .orb-float-late {
+    animation: none;
+  }
   .reveal {
     opacity: 1 !important;
     transform: none !important;

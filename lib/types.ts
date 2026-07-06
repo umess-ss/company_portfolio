@@ -24,7 +24,7 @@ export interface Service {
   id: string;
   name: string;
   description: string;
-  icon: LucideIcon;
+  iconName: string;
   tags: string[];
   deliverables: string[];
 }
@@ -34,8 +34,10 @@ export interface Technology {
   name: string;
   label: string;
   summary: string;
-  badge: string;
-  accent: string;
+  /** Official brand logo — 24x24 SVG path data from simple-icons. */
+  iconPath: string;
+  /** Official brand hex (no #). Near-black logos render as currentColor. */
+  hex: string;
 }
 
 export interface ProjectMetric {
@@ -52,6 +54,8 @@ export interface Project {
   title: string;
   clientName: string | null;
   serviceName: string;
+  category: string;
+  date: string;
   year: number;
   durationWeeks: number;
   teamSize: number;
@@ -62,6 +66,7 @@ export interface Project {
   outcomes: string;
   metrics: ProjectMetric[];
   techStack: string[];
+  coverImage: string;
   screen: ProductScreen;
 }
 
@@ -70,9 +75,9 @@ export interface TeamMember {
   name: string;
   role: string;
   initials: string;
-  skills: string[];
-  github: string;
-  linkedin: string;
+  skills?: string[];
+  github?: string;
+  linkedin?: string;
   photo: string | null;
 }
 
@@ -80,6 +85,7 @@ export interface ProcessStep {
   number: string;
   title: string;
   description: string;
+  icon: LucideIcon;
 }
 
 export interface Stat {

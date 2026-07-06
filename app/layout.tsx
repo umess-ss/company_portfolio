@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import Script from "next/script";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
 import { site } from "@/data/site";
 import { Chatbot } from "@/modules/chatbot";
@@ -24,7 +25,7 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400"],
 });
 
-const pageTitle = `${site.name} — AI Systems, Software & Mobile Apps, Kathmandu`;
+const pageTitle = "AI Systems, Software & Mobile Apps — Kathmandu";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -35,7 +36,6 @@ export const metadata: Metadata = {
     description: site.description,
     type: "website",
     locale: "en_US",
-    siteName: site.name,
   },
   twitter: {
     card: "summary_large_image",
@@ -45,13 +45,12 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#F7F9F8",
+  themeColor: "#0A0E16",
 };
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: site.name,
   description: site.description,
   url: site.url,
   email: site.email,
@@ -86,9 +85,15 @@ export default function RootLayout({
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
-        {children}
-        <Chatbot site={site} />
-        <Toaster />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          disableTransitionOnChange
+        >
+          {children}
+          <Chatbot site={site} />
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

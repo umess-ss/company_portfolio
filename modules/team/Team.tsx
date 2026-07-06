@@ -2,34 +2,17 @@
  * Owner: Ayush (@ayush)
  * Module rules: import only from data/, lib/, components/ — never
  * from another module. All CSS custom properties live in globals.css.
+ *
+ * Clean team cards: rounded portrait photo, name, role, and skills
+ * below. Inspired by modern SaaS team pages.
  */
 import Image from "next/image";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import type { TeamMember } from "@/lib/types";
 
-/* lucide-react v1 removed brand icons, so GitHub/LinkedIn are inlined
-   with the same 24px stroke style the rest of the page uses. */
-function GithubIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-      <path d="M9 18c-4.51 2-5-2-7-2" />
-    </svg>
-  );
-}
-
+/* lucide-react v1 dropped brand icons, so LinkedIn is inlined in the
+   same 24px stroke style as the rest of the page. */
 function LinkedinIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -56,75 +39,58 @@ export interface TeamProps {
 export function Team({ members }: TeamProps) {
   return (
     <section id="team" className="scroll-mt-24 bg-paper py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <SectionHeader
-          eyebrow="Founding teams"
+          eyebrow="Our team"
           title="Four engineers, no handoffs."
-          intro="The people you talk to are the people who build your system — from the first scoping call to the last deploy."
+          intro="The people you talk to are the people who build your system."
         />
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {members.map((member, i) => (
-            <Reveal key={member.id} delay={i * 90} className="h-full">
-              <div className="flex h-full flex-col gap-4 rounded-xl border border-contour/20 bg-white p-6 transition hover:border-contour/50 hover:shadow-md">
-                {member.photo ? (
-                  <div className="relative aspect-square w-full overflow-hidden rounded-lg">
-                    <Image
-                      src={member.photo}
-                      alt={`Photo of ${member.name}`}
-                      fill
-                      sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                      className="object-cover grayscale transition hover:grayscale-0"
-                    />
-                  </div>
-                ) : (
-                  <div className="flex aspect-square w-full items-center justify-center rounded-lg bg-pine/5">
-                    <Avatar className="size-20">
-                      <AvatarFallback className="bg-pine/10 font-display text-2xl text-pine">
-                        {member.initials}
-                      </AvatarFallback>
-                    </Avatar>
-                  </div>
-                )}
-                <div>
-                  <h3 className="font-display text-lg font-medium text-ink">
+            <Reveal key={member.id} delay={(i % 4) * 80} className="h-full">
+              <article className="flex flex-col items-start">
+                {/* Photo — rounded corners, subtle bg */}
+                <div className="relative mb-5 aspect-[4/5] w-full overflow-hidden rounded-2xl bg-contour/20">
+                  <Image
+                    src={member.photo ?? "/team/placeholder.svg"}
+                    alt={`Photo of ${member.name}`}
+                    fill
+                    unoptimized
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+
+                {/* Name & LinkedIn */}
+                <div className="flex w-full items-center justify-between">
+                  <h3 className="font-display text-lg font-semibold text-ink">
                     {member.name}
                   </h3>
-                  <p className="font-body text-sm text-contour-strong">
-                    {member.role}
-                  </p>
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {member.skills.map((skill) => (
-                    <Badge
-                      key={skill}
-                      variant="outline"
-                      className="border-pine/20 bg-pine/10 font-mono text-xs text-pine"
+                  {member.linkedin && (
+                    <a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${member.name} on LinkedIn`}
+                      className="text-contour-strong transition-colors hover:text-signal"
                     >
-                      {skill}
-                    </Badge>
-                  ))}
+                      <LinkedinIcon className="size-5" />
+                    </a>
+                  )}
                 </div>
-                <div className="mt-auto flex gap-3">
-                  <a
-                    href={member.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${member.name} on GitHub`}
-                    className="text-contour-strong transition-colors hover:text-signal"
-                  >
-                    <GithubIcon className="size-5" />
-                  </a>
-                  <a
-                    href={member.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${member.name} on LinkedIn`}
-                    className="text-contour-strong transition-colors hover:text-signal"
-                  >
-                    <LinkedinIcon className="size-5" />
-                  </a>
-                </div>
-              </div>
+
+                {/* Role */}
+                <p className="mt-1 font-body text-sm font-medium text-signal">
+                  {member.role}
+                </p>
+
+                {/* Skills as description text */}
+                {member.skills && (
+                  <p className="mt-2 font-body text-sm leading-relaxed text-contour-strong">
+                    {member.skills.join(", ")}
+                  </p>
+                )}
+              </article>
             </Reveal>
           ))}
         </div>

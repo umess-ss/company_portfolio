@@ -5,12 +5,15 @@
  * Module rules: import only from data/, lib/, components/ - never
  * from another module. All CSS custom properties live in globals.css.
  *
- * The case study dialog is controlled from page.tsx (openSlug) so the
- * hero's contour markers can open it without cross-module imports.
+ * Case-studies layout inspired by ekbana.com/case-studies:
+ * category filter tabs, 3-column card grid with cover images,
+ * category badges, dates, titles, and summaries.
  */
-import { ProductFrame } from "@/components/ProductFrame";
+import { useState } from "react";
+import Image from "next/image";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -23,9 +26,8 @@ import type { Project } from "@/lib/types";
 
 export interface WorkProps {
   projects: Project[];
-  /** Slug of the project whose case study modal is open, or null. */
-  openSlug: string | null;
-  onOpenChange: (slug: string | null) => void;
+  /** Render every project up front (dedicated /work page). */
+  expanded?: boolean;
 }
 
 const CASE_STUDY_SECTIONS = [
@@ -41,34 +43,33 @@ function projectMeta(project: Project) {
 
 function CaseStudyCover({ project }: { project: Project }) {
   return (
-    <div className="relative overflow-hidden rounded-xl border border-contour/20 bg-gradient-to-br from-ink via-ink/95 to-pine/80 p-4 text-paper shadow-sm sm:p-5 lg:p-6">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.18),_transparent_34%),radial-gradient(circle_at_bottom_left,_rgba(228,87,46,0.18),_transparent_28%)]" />
+    <div className="relative overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-[#0B1526] via-[#0E1B33] to-[#123A8F] p-4 text-white shadow-sm sm:p-5 lg:p-6">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(85,162,255,0.18),_transparent_34%),radial-gradient(circle_at_bottom_left,_rgba(124,231,255,0.12),_transparent_28%)]" />
       <div className="relative space-y-5">
         <div className="space-y-4">
-          <div className="inline-flex rounded-full border border-paper/15 bg-paper/10 px-3 py-1 font-mono text-[11px] tracking-widest text-contour">
+          <div className="inline-flex rounded-full border border-white/15 bg-white/10 px-3 py-1 font-mono text-[11px] tracking-widest text-white/70">
             CASE STUDY
           </div>
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.24em] text-contour/80">
+            <p className="font-mono text-xs uppercase tracking-[0.24em] text-white/60">
               {project.serviceName} - {project.year}
             </p>
-            <h3 className="mt-2 font-display text-2xl tracking-tight text-paper sm:text-3xl">
+            <h3 className="mt-2 font-display text-2xl tracking-tight text-white sm:text-3xl">
               {project.title}
             </h3>
-            <p className="mt-3 max-w-3xl font-body text-sm leading-relaxed text-contour">
+            <p className="mt-3 max-w-3xl font-body text-sm leading-relaxed text-white/70">
               {project.summary}
             </p>
           </div>
         </div>
-
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
           {project.metrics.slice(0, 3).map((metric) => (
             <div
               key={metric.label}
-              className="rounded-lg border border-paper/10 bg-paper/10 p-3 backdrop-blur-sm"
+              className="rounded-lg border border-white/10 bg-white/10 p-3 backdrop-blur-sm"
             >
-              <p className="font-mono text-base text-paper">{metric.value}</p>
-              <p className="mt-1 font-body text-[11px] leading-tight text-contour">
+              <p className="font-mono text-base text-white">{metric.value}</p>
+              <p className="mt-1 font-body text-[11px] leading-tight text-white/70">
                 {metric.label}
               </p>
             </div>
@@ -79,64 +80,127 @@ function CaseStudyCover({ project }: { project: Project }) {
   );
 }
 
-export function Work({ projects, openSlug, onOpenChange }: WorkProps) {
+const INITIAL_COUNT = 3;
+
+export function Work({ projects, expanded = false }: WorkProps) {
+  const [openSlug, setOpenSlug] = useState<string | null>(null);
   const openProject = projects.find((p) => p.slug === openSlug) ?? null;
+  const [showAll, setShowAll] = useState(expanded);
+  const [activeCategory, setActiveCategory] = useState("All Topic");
+
+  // Derive unique categories from project data
+  const categories = [
+    "All Topic",
+    ...Array.from(new Set(projects.map((p) => p.category))),
+  ];
+
+  const filtered =
+    activeCategory === "All Topic"
+      ? projects
+      : projects.filter((p) => p.category === activeCategory);
+
+  const visible = showAll ? filtered : filtered.slice(0, INITIAL_COUNT);
 
   return (
-    <section id="work" className="scroll-mt-24 bg-ink py-24 text-paper md:py-32">
-      <div className="mx-auto max-w-6xl px-6">
+    <section id="work" className="scroll-mt-24 bg-paper py-24 text-ink md:py-32">
+      <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <SectionHeader
-          dark
-          eyebrow="Selected work"
-          title="Systems that are running right now."
-          intro="Four production systems across logistics, healthcare, legal, and finance - built end to end by this team."
+          eyebrow="Our Categories"
+          title="Explore different categories"
         />
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          {projects.map((project, i) => (
-            <Reveal key={project.id} delay={(i % 2) * 90} className="h-full">
+
+        {/* ── Category filter tabs ─────────────────────────────── */}
+        <div className="mb-10 flex flex-wrap gap-1 border-b border-contour/40">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              type="button"
+              onClick={() => {
+                setActiveCategory(cat);
+                setShowAll(expanded);
+              }}
+              className={`relative px-4 py-3 font-body text-sm transition-colors ${
+                activeCategory === cat
+                  ? "text-signal"
+                  : "text-contour-strong hover:text-ink"
+              }`}
+            >
+              {cat}
+              {activeCategory === cat && (
+                <span className="absolute inset-x-0 bottom-0 h-0.5 rounded-full bg-signal" />
+              )}
+            </button>
+          ))}
+        </div>
+
+        {/* ── Project cards grid ───────────────────────────────── */}
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {visible.map((project, i) => (
+            <Reveal key={project.id} delay={(i % 3) * 80} className="h-full">
               <button
                 type="button"
-                onClick={() => onOpenChange(project.slug)}
-                className="group h-full w-full cursor-pointer rounded-xl border border-paper/10 bg-paper/5 p-5 text-left transition hover:border-paper/30 hover:shadow-md"
+                onClick={() => setOpenSlug(project.slug)}
+                className="group h-full w-full cursor-pointer text-left"
                 aria-label={`View case study: ${project.title}`}
               >
-                <div className="relative aspect-8/5 w-full overflow-hidden rounded-lg">
-                  <ProductFrame screen={project.screen} />
+                {/* Cover image with badges */}
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl">
+                  <Image
+                    src={project.coverImage}
+                    alt={project.title}
+                    fill
+                    unoptimized
+                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                    className="object-cover transition duration-500 group-hover:scale-105"
+                  />
+                  {/* Category badges at bottom-left */}
+                  <div className="absolute bottom-3 left-3 flex flex-wrap gap-1.5">
+                    <Badge className="border-0 bg-signal px-3 py-1 font-body text-xs font-medium text-white shadow-md">
+                      {project.category}
+                    </Badge>
+                    <Badge className="border-0 bg-signal/80 px-3 py-1 font-body text-xs font-medium text-white shadow-md">
+                      {project.serviceName}
+                    </Badge>
+                  </div>
                 </div>
-                <p className="mt-5 font-mono text-xs text-contour">
-                  {projectMeta(project)}
+
+                {/* Date */}
+                <p className="mt-4 font-body text-xs text-signal">
+                  {project.date}
                 </p>
-                <div className="mt-2 flex flex-wrap items-center gap-3">
-                  <span className="font-body text-sm text-contour">
-                    {project.clientName ?? "Confidential"}
-                  </span>
-                  <Badge
-                    variant="outline"
-                    className="border-paper/20 bg-paper/10 font-mono text-xs text-paper"
-                  >
-                    {project.serviceName}
-                  </Badge>
-                </div>
-                <h3 className="mt-2 font-display text-xl font-medium text-paper">
+
+                {/* Title */}
+                <h3 className="mt-2 font-display text-lg font-semibold text-ink transition-colors group-hover:text-signal">
                   {project.title}
                 </h3>
-                <p className="mt-2 font-body text-sm text-contour">
+
+                {/* Summary */}
+                <p className="mt-2 line-clamp-2 font-body text-sm leading-relaxed text-contour-strong">
                   {project.summary}
                 </p>
-                <span className="mt-4 inline-block font-body text-sm text-signal underline decoration-signal/40 underline-offset-4 transition group-hover:decoration-signal">
-                  View case study -&gt;
-                </span>
               </button>
             </Reveal>
           ))}
         </div>
+
+        {!expanded && filtered.length > INITIAL_COUNT && (
+          <Reveal className="mt-10 text-center">
+            <Button
+              variant="outline"
+              className="border-contour px-6"
+              onClick={() => setShowAll((s) => !s)}
+            >
+              {showAll ? "Show fewer" : `View all projects (${filtered.length})`}
+            </Button>
+          </Reveal>
+        )}
       </div>
 
       {/* Case study modal - shadcn Dialog handles focus trap and Escape. */}
       <Dialog
         open={openProject !== null}
         onOpenChange={(open) => {
-          if (!open) onOpenChange(null);
+          if (!open) setOpenSlug(null);
         }}
       >
         {openProject && (

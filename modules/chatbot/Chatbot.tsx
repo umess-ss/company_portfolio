@@ -58,7 +58,7 @@ export function Chatbot({ site }: ChatbotProps) {
     {
       id: 1,
       role: "assistant",
-      text: `Hi! I am the ${site.name} assistant. Ask me about services, timelines, or how to get started.`,
+      text: "Hi! Ask me about services, timelines, or how to get started.",
     },
   ]);
 
@@ -88,7 +88,7 @@ export function Chatbot({ site }: ChatbotProps) {
           aria-label="Chat assistant"
         >
           <header className="flex items-center justify-between border-b border-ink/10 bg-ink px-4 py-3 text-paper">
-            <p className="font-heading text-sm font-semibold">Chat with {site.name}</p>
+            <p className="font-heading text-sm font-semibold">Chat with us</p>
             <Button
               type="button"
               size="icon-sm"
@@ -127,7 +127,7 @@ export function Chatbot({ site }: ChatbotProps) {
                   key={prompt}
                   type="button"
                   onClick={() => submitMessage(prompt)}
-                  className="rounded-full border border-ink/10 bg-white px-2.5 py-1 text-xs text-ink transition hover:border-signal/40 hover:text-signal"
+                  className="rounded-full border border-ink/10 bg-card px-2.5 py-1 text-xs text-ink transition hover:border-signal/40 hover:text-signal"
                 >
                   {prompt}
                 </button>
@@ -143,7 +143,7 @@ export function Chatbot({ site }: ChatbotProps) {
                 value={draft}
                 onChange={(event) => setDraft(event.target.value)}
                 placeholder="Ask about your project..."
-                className="h-9 w-full rounded-full border border-ink/15 bg-white px-3 text-sm text-ink placeholder:text-ink/55"
+                className="h-9 w-full rounded-full border border-ink/15 bg-card px-3 text-sm text-ink placeholder:text-ink/55"
               />
               <Button type="submit" size="icon-sm" aria-label="Send message">
                 <Send className="size-4" />
