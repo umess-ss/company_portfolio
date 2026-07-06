@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://umess-ss.github.io/company_portfolio/sitemap.xml
