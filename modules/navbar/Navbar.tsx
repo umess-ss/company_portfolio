@@ -209,14 +209,14 @@ function ContactUsPanel({ onClose, site }: { onClose: () => void; site: SiteConf
       </div>
       <div className="md:col-span-2 flex flex-col justify-center">
         <p className="mb-2 font-display text-lg font-medium text-white">
-          Ready to start a project?
+          Ready to talk to an expert?
         </p>
         <p className="mb-5 max-w-md font-body text-sm text-white/60">
           Tell us what you&apos;re building. An engineer — never a salesperson — reads it and replies with honest next steps.
         </p>
         <Button asChild size="lg" className="w-fit px-8">
           <Link href="/contact" onClick={onClose}>
-            Start a project <ArrowRight className="ml-2 size-4" />
+            Talk to an Expert <ArrowRight className="ml-2 size-4" />
           </Link>
         </Button>
       </div>
@@ -396,7 +396,7 @@ export function Navbar({ site }: NavbarProps) {
           <div className="flex items-center gap-3">
             <ThemeToggle />
             <Button asChild size="sm" className="hidden px-5 lg:inline-flex">
-              <Link href="/contact">Start a project</Link>
+              <Link href="/contact">Talk to an Expert</Link>
             </Button>
             <button
               type="button"
@@ -505,7 +505,7 @@ export function Navbar({ site }: NavbarProps) {
               <div className="mt-4 border-t border-white/10 pt-4">
                 <Button asChild size="sm" className="w-full">
                   <Link href="/contact" onClick={() => setMobileOpen(false)}>
-                    Start a project
+                    Talk to an Expert
                   </Link>
                 </Button>
               </div>
