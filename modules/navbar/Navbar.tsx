@@ -13,6 +13,7 @@ import {
   ArrowRight,
   BookOpen,
   BrainCircuit,
+  Building2,
   ChevronDown,
   Code2,
   FileText,
@@ -48,7 +49,15 @@ export interface NavbarProps {
 
 function AboutUsPanel({ onClose }: { onClose: () => void }) {
   return (
-    <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <PanelCard
+        href="/about"
+        icon={<Building2 className="size-6" />}
+        title="Our Story"
+        description="Who we are, why we keep the team small, and the four principles behind every project we take on."
+        cta="ABOUT US"
+        onClose={onClose}
+      />
       <PanelCard
         href="/how-we-work"
         icon={<Rocket className="size-6" />}
@@ -82,25 +91,25 @@ function ServicePanel({ onClose }: { onClose: () => void }) {
     {
       label: "Development",
       items: [
-        { icon: <Code2 className="size-4" />, name: "Web Development", desc: "Sites, platforms & dashboards", href: "/services" },
-        { icon: <Smartphone className="size-4" />, name: "App Development", desc: "iOS & Android, one codebase", href: "/services" },
-        { icon: <BrainCircuit className="size-4" />, name: "AI Systems", desc: "RAG, agents & copilots", href: "/services" },
+        { icon: <Code2 className="size-4" />, name: "Web Development", desc: "Sites, platforms & dashboards", href: "/services/web-development" },
+        { icon: <Smartphone className="size-4" />, name: "App Development", desc: "iOS & Android, one codebase", href: "/services/mobile-apps" },
+        { icon: <BrainCircuit className="size-4" />, name: "AI Systems", desc: "Chatbots, document AI & automation", href: "/services/ai-systems" },
         { icon: <Layers className="size-4" />, name: "Custom Development", desc: "Tailored software solutions", href: "/services" },
       ],
     },
     {
       label: "Marketing",
       items: [
-        { icon: <Search className="size-4" />, name: "SEO & Digital Marketing", desc: "Rankings, traffic & conversions", href: "/services" },
-        { icon: <Megaphone className="size-4" />, name: "Social Media Management", desc: "Content, community & paid ads", href: "/services" },
-        { icon: <PenTool className="size-4" />, name: "Graphic Design", desc: "Branding, UI/UX & print", href: "/services" },
+        { icon: <Search className="size-4" />, name: "SEO & Digital Marketing", desc: "Rankings, traffic & conversions", href: "/services/seo-marketing" },
+        { icon: <Megaphone className="size-4" />, name: "Social Media Management", desc: "Content, community & paid ads", href: "/services/social-media" },
+        { icon: <PenTool className="size-4" />, name: "Graphic Design", desc: "Branding & creatives", href: "/services/graphic-design" },
       ],
     },
     {
       label: "Solutions",
       items: [
-        { icon: <GraduationCap className="size-4" />, name: "Education Management", desc: "School & institute operations", href: "/services" },
-        { icon: <MessageSquareText className="size-4" />, name: "Bulk SMS Service", desc: "Alerts, OTP & campaigns", href: "/services" },
+        { icon: <GraduationCap className="size-4" />, name: "Education Management", desc: "School & institute operations", href: "/services/education-management" },
+        { icon: <MessageSquareText className="size-4" />, name: "Bulk SMS Service", desc: "Alerts, OTP & campaigns", href: "/services/bulk-sms" },
       ],
     },
   ];
@@ -362,7 +371,7 @@ export function Navbar({ site }: NavbarProps) {
                         setActiveMenu((prev) => (prev === item.megaKey ? null : item.megaKey!))
                       }
                       aria-expanded={activeMenu === item.megaKey}
-                      className={`flex items-center gap-1 px-4 py-2 font-body text-xs font-medium tracking-wider transition-colors ${
+                      className={`flex items-center gap-1 px-4 py-2 font-display text-sm font-semibold tracking-wider transition-colors ${
                         activeMenu === item.megaKey
                           ? "text-signal"
                           : "text-ink/70 hover:text-ink"
@@ -381,7 +390,7 @@ export function Navbar({ site }: NavbarProps) {
                   <li key={item.label}>
                     <Link
                       href={item.href!}
-                      className="px-4 py-2 font-body text-xs font-medium tracking-wider text-ink/70 transition-colors hover:text-ink"
+                      className="px-4 py-2 font-display text-sm font-semibold tracking-wider text-ink/70 transition-colors hover:text-ink"
                     >
                       {item.label}
                     </Link>
@@ -394,9 +403,6 @@ export function Navbar({ site }: NavbarProps) {
           {/* Right side */}
           <div className="flex items-center gap-3">
             <ThemeToggle />
-            <Button asChild size="sm" className="hidden px-5 lg:inline-flex">
-              <Link href="/contact">Talk to an Expert</Link>
-            </Button>
             <button
               type="button"
               className="text-ink lg:hidden"
@@ -501,13 +507,6 @@ export function Navbar({ site }: NavbarProps) {
                   ),
                 )}
               </div>
-              <div className="mt-4 border-t border-white/10 pt-4">
-                <Button asChild size="sm" className="w-full">
-                  <Link href="/contact" onClick={() => setMobileOpen(false)}>
-                    Talk to an Expert
-                  </Link>
-                </Button>
-              </div>
             </div>
           </motion.nav>
         )}
@@ -527,18 +526,19 @@ function MobileSubLinks({
     switch (megaKey) {
       case "about":
         return [
+          { label: "Our Story", href: "/about" },
           { label: "How We Work", href: "/how-we-work" },
           { label: "Our Work", href: "/work" },
           { label: "Our Team", href: "/team" },
         ];
       case "service":
         return [
-          { label: "Web Development", href: "/services" },
-          { label: "App Development", href: "/services" },
-          { label: "AI Systems", href: "/services" },
-          { label: "SEO & Marketing", href: "/services" },
-          { label: "Education Management", href: "/services" },
-          { label: "Bulk SMS", href: "/services" },
+          { label: "Web Development", href: "/services/web-development" },
+          { label: "App Development", href: "/services/mobile-apps" },
+          { label: "AI Systems", href: "/services/ai-systems" },
+          { label: "SEO & Marketing", href: "/services/seo-marketing" },
+          { label: "Education Management", href: "/services/education-management" },
+          { label: "Bulk SMS", href: "/services/bulk-sms" },
           { label: "View all services", href: "/services" },
         ];
       case "resources":

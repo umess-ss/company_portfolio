@@ -8,6 +8,7 @@
 import Image from "next/image";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/SectionHeader";
+import { getImagePath } from "@/lib/images";
 import type { TeamMember } from "@/lib/types";
 
 /* lucide-react v1 dropped brand icons, so LinkedIn is inlined in the
@@ -51,7 +52,7 @@ export function Team({ members }: TeamProps) {
                 {/* Photo — rounded corners, subtle bg */}
                 <div className="relative mb-5 aspect-[4/5] w-full overflow-hidden rounded-2xl bg-contour/20">
                   <Image
-                    src={member.photo ?? "/company_portfolio/team/placeholder.svg"}
+                    src={getImagePath(member.photo ?? "/team/placeholder.svg")}
                     alt={`Photo of ${member.name}`}
                     fill
                     unoptimized

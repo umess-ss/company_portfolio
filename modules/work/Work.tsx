@@ -22,6 +22,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Reveal } from "@/components/ui/reveal";
+import { getImagePath } from "@/lib/images";
 import type { Project } from "@/lib/types";
 
 export interface WorkProps {
@@ -146,22 +147,13 @@ export function Work({ projects, expanded = false }: WorkProps) {
                 {/* Cover image with badges */}
                 <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl">
                   <Image
-                    src={project.coverImage}
+                    src={getImagePath(project.coverImage)}
                     alt={project.title}
                     fill
                     unoptimized
                     sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                     className="object-cover transition duration-500 group-hover:scale-105"
                   />
-                  {/* Category badges at bottom-left */}
-                  <div className="absolute bottom-3 left-3 flex flex-wrap gap-1.5">
-                    <Badge className="border-0 bg-signal px-3 py-1 font-body text-xs font-medium text-white shadow-md">
-                      {project.category}
-                    </Badge>
-                    <Badge className="border-0 bg-signal/80 px-3 py-1 font-body text-xs font-medium text-white shadow-md">
-                      {project.serviceName}
-                    </Badge>
-                  </div>
                 </div>
 
                 {/* Date */}

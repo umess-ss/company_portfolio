@@ -13,6 +13,7 @@ export interface FooterProps {
 
 const NAV_LINKS = [
   ["Home", "/"],
+  ["About", "/about"],
   ["Services", "/services"],
   ["Technologies", "/technologies"],
   ["Work", "/work"],
@@ -88,10 +89,24 @@ export function Footer({ site }: FooterProps) {
           </div>
         </div>
 
-        <div className="border-t border-contour/50 py-6">
+        <div className="flex flex-col gap-2 border-t border-contour/50 py-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-contour-strong">
             © {currentYear} · All rights reserved.
           </p>
+          <div className="flex gap-4">
+            <Link
+              href="/privacy"
+              className="text-xs text-contour-strong transition-colors hover:text-signal"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/terms"
+              className="text-xs text-contour-strong transition-colors hover:text-signal"
+            >
+              Terms of Use
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

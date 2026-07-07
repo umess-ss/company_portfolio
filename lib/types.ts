@@ -25,9 +25,9 @@ export interface Service {
   id: string;
   name: string;
   description: string;
-  iconName: string;
-  tags: string[];
   deliverables: string[];
+  /** Detail-page paragraphs (/services/[id]) — plain language. */
+  details: string[];
 }
 
 export interface Technology {
@@ -96,7 +96,27 @@ export interface Stat {
 
 export interface Testimonial {
   quote: string;
-  name: string;
-  title: string;
+  /** Role-based attribution ("School Director") until naming permission exists. */
+  attribution: string;
+  /** Sector / location line, e.g. "Restaurant chain · Kathmandu". */
   organization: string;
+}
+
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+export interface LegalSection {
+  heading: string;
+  /** Each string renders as one paragraph. */
+  body: string[];
+}
+
+export interface LegalDoc {
+  title: string;
+  /** Human-readable "last updated" date, e.g. "July 7, 2026". */
+  updated: string;
+  intro: string;
+  sections: LegalSection[];
 }
