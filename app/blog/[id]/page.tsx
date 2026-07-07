@@ -6,16 +6,18 @@ import { BlogPostView } from "@/modules/blog";
 import { Footer } from "@/modules/footer";
 import { Navbar } from "@/modules/navbar";
 
+// Next 16: `params` is a Promise and must be awaited.
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
-  const post = blog.find((p) => p.id === params.id);
+  const { id } = await params;
+  const post = blog.find((p) => p.id === id);
 
   if (!post) {
     return {
@@ -42,8 +44,9 @@ export function generateStaticParams() {
   }));
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = blog.find((p) => p.id === params.id);
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { id } = await params;
+  const post = blog.find((p) => p.id === id);
 
   if (!post) {
     notFound();

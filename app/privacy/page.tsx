@@ -1,23 +1,22 @@
 import type { Metadata } from "next";
-import { projects } from "@/data/projects";
+import { privacy } from "@/data/legal";
 import { site } from "@/data/site";
-import { Cta } from "@/modules/cta";
 import { Footer } from "@/modules/footer";
+import { Legal } from "@/modules/legal";
 import { Navbar } from "@/modules/navbar";
-import { Work } from "@/modules/work";
 
 export const metadata: Metadata = {
-  title: "Work",
-  description: "Production systems built end to end by one senior team.",
+  title: "Privacy Policy",
+  description:
+    "No accounts, no tracking, no analytics — what little happens with your data on this site, in plain language.",
 };
 
-export default function WorkPage() {
+export default function PrivacyPage() {
   return (
     <>
       <Navbar site={site} />
       <main className="pt-16">
-        <Work projects={projects} expanded />
-        <Cta />
+        <Legal doc={privacy} />
       </main>
       <Footer site={site} />
     </>

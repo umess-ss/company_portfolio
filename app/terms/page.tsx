@@ -1,23 +1,22 @@
 import type { Metadata } from "next";
-import { projects } from "@/data/projects";
+import { terms } from "@/data/legal";
 import { site } from "@/data/site";
-import { Cta } from "@/modules/cta";
 import { Footer } from "@/modules/footer";
+import { Legal } from "@/modules/legal";
 import { Navbar } from "@/modules/navbar";
-import { Work } from "@/modules/work";
 
 export const metadata: Metadata = {
-  title: "Work",
-  description: "Production systems built end to end by one senior team.",
+  title: "Terms of Use",
+  description:
+    "The terms covering use of this website — client work is governed by a separate written agreement per project.",
 };
 
-export default function WorkPage() {
+export default function TermsPage() {
   return (
     <>
       <Navbar site={site} />
       <main className="pt-16">
-        <Work projects={projects} expanded />
-        <Cta />
+        <Legal doc={terms} />
       </main>
       <Footer site={site} />
     </>

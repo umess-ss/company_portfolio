@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { site } from "@/data/site";
+import { Cta } from "@/modules/cta";
 import { Footer } from "@/modules/footer";
 import { Navbar } from "@/modules/navbar";
 import { Technologies } from "@/modules/technologies";
@@ -16,6 +17,7 @@ export default function TechnologiesPage() {
       <Navbar site={site} />
       <main className="pt-16">
         <Technologies />
+        <Cta />
       </main>
       <Footer site={site} />
     </>

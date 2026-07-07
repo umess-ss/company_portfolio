@@ -14,7 +14,7 @@ export const team: TeamMember[] = [
     initials: "UR",
     skills: ["React", "Next.js", "Tailwind", "CI/CD"],
     linkedin: "https://www.linkedin.com/in/umeshrajbanshi/",
-    photo: "/company_portfolio/team/umesh.jpeg",
+    photo: "/team/umesh.jpeg",
   },
   {
     id: "anish",
@@ -23,7 +23,7 @@ export const team: TeamMember[] = [
     initials: "AG",
     skills: ["Python", "Django", "LangChain", "PostgreSQL"],
     linkedin: "https://www.linkedin.com/in/anish-ghimire-79a525223/",
-    photo: "/company_portfolio/team/anish.jpeg",
+    photo: "/team/anish.jpeg",
   },
   {
     id: "govinda",
@@ -32,7 +32,7 @@ export const team: TeamMember[] = [
     initials: "GB",
     skills: ["Next.js", "Node.js", "Express", "Go"],
     linkedin: "https://www.linkedin.com/in/govinda-bhandari-4426142a1/",
-    photo: "/company_portfolio/team/govinda.jpeg",
+    photo: "/team/govinda.jpeg",
   },
   {
     id: "ayush",
@@ -41,6 +41,6 @@ export const team: TeamMember[] = [
     initials: "AK",
     skills: ["React Native", "Flutter", "Firebase", "Docker"],
     linkedin: "https://www.linkedin.com/in/ayush-khanal-345647296/",
-    photo: "/company_portfolio/team/ayush.jpeg",
+    photo: "/team/ayush.jpeg",
   },
 ];
