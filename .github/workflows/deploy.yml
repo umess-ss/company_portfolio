@@ -32,6 +32,8 @@ jobs:
           path: './out'
 
   deploy:
+    # Only deploy from pushes to main — PR builds are a check, not a release.
+    if: github.event_name == 'push'
     needs: build
     permissions:
       pages: write
